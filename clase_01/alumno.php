@@ -1,5 +1,7 @@
 <?php
-    class Alumno{
+    class Alumno extends Persona {
+
+        $legajo;
         public $nombre;
         public $edad;
         // Alumno($nombre, )
