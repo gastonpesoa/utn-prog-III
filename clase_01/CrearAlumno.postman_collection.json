@@ -1,0 +1,62 @@
+{
+	"info": {
+		"_postman_id": "0a835c81-6bc7-4a7c-938d-085049680d52",
+		"name": "CrearAlumno",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost:8080/utn/prog-III/clase-01/CrearAlumno.php",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "nombre",
+							"value": "gaston",
+							"type": "text"
+						},
+						{
+							"key": "edad",
+							"value": "30",
+							"type": "text"
+						},
+						{
+							"key": "dni",
+							"value": "33594741",
+							"type": "text"
+						},
+						{
+							"key": "legajo",
+							"value": "123456",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8080/utn/prog-III/clase-01/CrearAlumno.php",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"utn",
+						"prog-III",
+						"clase-01",
+						"CrearAlumno.php"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
