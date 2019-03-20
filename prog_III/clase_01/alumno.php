@@ -1,18 +1,12 @@
 <?php
+    require 'persona.php';
     class Alumno extends Persona {
 
-        $legajo;
-        public $nombre;
-        public $edad;
-        // Alumno($nombre, )
+        public $legajo;
     
-        function __construct($nombre, $edad){
-            $this->nombre = $nombre;
-            $this->edad = $edad;
-        }
-
-        public function returnJSON(){
-            return json_encode($this);
-        }
+        function __construct($nombre, $edad, $dni, $legajo){
+            parent::__construct($nombre, $edad, $dni);
+            $this->legajo = $legajo;
+        }        
     }
 ?>

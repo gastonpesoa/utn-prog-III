@@ -1,9 +1,16 @@
 <?php
-abstract class Humano{
+class Humano{
 
-    $nombre;
-    $edad;
+    public $nombre;
+    public $edad;
 
-    abstract protected function returnJSON();
+    function __construct($nombre, $edad){
+        $this->nombre = $nombre;
+        $this->edad = $edad;
+    }
+
+    public function returnJSON(){
+        return json_encode($this);
+    }
 }
 ?>

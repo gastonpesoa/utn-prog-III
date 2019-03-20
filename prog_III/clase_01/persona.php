@@ -1,10 +1,12 @@
 <?php
-require 'humano.php'
-class Persona extends Humano 
-{
-    $dni;
+    require 'humano.php';
+    class Persona extends Humano 
+    {
+        public $dni;
 
-    abstract function returnJSON(){
-        
+        function __construct($nombre, $edad, $dni){
+            parent::__construct($nombre, $edad);
+            $this->dni = $dni;
+        }    
     }
-}
+?>
