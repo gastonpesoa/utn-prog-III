@@ -9,8 +9,10 @@
 
     $nombre = $_POST['nombre'];
     $edad = $_POST['edad'];
+    $dni = $_POST['dni'];
+    $legajo = $_POST['legajo'];
 
-    $myAlumno = new Alumno($nombre, $edad);
+    $myAlumno = new Alumno($nombre, $edad, $dni, $legajo);
     // var_dump($myAlumno);
     var_dump($myAlumno->returnJSON());
 ?>
