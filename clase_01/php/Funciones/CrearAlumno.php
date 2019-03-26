@@ -13,8 +13,8 @@
     $legajo = $_POST['legajo'];
 
     $myAlumno = new Alumno($nombre, $edad, $dni, $legajo);
-    // $myAlumno->Guardar("ListadoAlumno.txt");
-    $myAlumno->GuardarJSON("ListadoAlumno.json");
+    $myAlumno->Guardar("../Archivos/ListadoAlumno.txt");
+    // $myAlumno->GuardarJSON("../Archivos/ListadoAlumno.json");
     // var_dump($myAlumno);
     var_dump($myAlumno->returnJSON());
 ?>
