@@ -2,7 +2,7 @@
 json
 array de json
 
-CrearAlumno.php
-ListarAlumno.php
-BorrarAlumno.php
-ModificarAlumno.php
+CrearAlumno.php -> POST
+ListarAlumno.php -> GET
+BorrarAlumno.php -> DELETE
+ModificarAlumno.php -> PUSH

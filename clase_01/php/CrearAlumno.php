@@ -1,11 +1,11 @@
 <?php
     require 'alumno.php';
 
-    echo "GET: ";
-    var_dump($_GET);
+    // echo "GET: ";
+    // var_dump($_GET);
     
-    echo "POST: ";
-    var_dump($_POST);
+    // echo "POST: ";
+    // var_dump($_POST);
 
     $nombre = $_POST['nombre'];
     $edad = $_POST['edad'];
@@ -13,7 +13,8 @@
     $legajo = $_POST['legajo'];
 
     $myAlumno = new Alumno($nombre, $edad, $dni, $legajo);
-    $myAlumno->Guardar("ListadoAlumno.txt");
+    // $myAlumno->Guardar("ListadoAlumno.txt");
+    $myAlumno->GuardarJSON("ListadoAlumno.json");
     // var_dump($myAlumno);
     var_dump($myAlumno->returnJSON());
 ?>
