@@ -9,7 +9,7 @@ class Humano{
         $this->edad = $edad;
     }
 
-    public function returnJSON(){
+    public function objeto_a_json(){
         return json_encode($this);
     }
 }
