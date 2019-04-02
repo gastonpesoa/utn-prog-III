@@ -11,9 +11,10 @@ $myAlumno = new Alumno($nombre, $apellido, $edad, $dni, $legajo);
 echo $myAlumno->guardar_txt(ARCHIVOS . "/ListadoAlumno.txt");
 //echo $myAlumno->guardar_json(ARCHIVOS . "/ListadoAlumno.json");
 
+$nombreArchivo = "{$myAlumno->legajo}_{$myAlumno->apellido}"; 
 //var_dump($_FILES);
 if(!empty($_FILES['imagen']))
-    echo $myAlumno->guardar_archivo($_FILES);  
+    echo $myAlumno->guardar_archivo($_FILES, FOTOS, $nombreArchivo, FOTOS_BACKUP, URL_ESTAMPA);  
 
 // if (!empty($_FILES['imagen'])) 
 //     if(is_uploaded_file($_FILES['imagen']['tmp_name']) || file_exists($_FILES['imagen']['tmp_name']))

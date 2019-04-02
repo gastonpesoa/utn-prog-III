@@ -18,26 +18,23 @@ class Alumno extends Persona {
     //===================== METODOS PRIVADOS ========================
 
     //para archivos
-    private function renombrar_archivo($file, &$nombreAlumno, &$extension)
-    {   
-        $nameimagen = explode('.', $file['imagen']['name']);
-        $extension = "." . $nameimagen[count($nameimagen)-1];
-        $nombreAlumno = "{$this->legajo}_{$this->apellido}";          
-        return FOTOS . $nombreAlumno . $extension; 
+    private function renombrar_archivo($urlDestino, $nombreArchivo, $extension)
+    {            
+        return $urlDestino . $nombreArchivo . $extension; 
     }
 
-    private function renombrar_archivo_existente(&$nombreAlumno, &$extension)
+    private function renombrar_archivo_existente($urlBackup, $nombreArchivo, $extension)
     {   
         $hoy = date("_d-m-Y");
-        return FOTOSBACKUP . $nombreAlumno . $hoy . $extension;
+        return $urlBackup . $nombreArchivo . $hoy . $extension;
     }
 
-    private function crear_backup($uploadfile, &$nombreAlumno, &$extension)
+    private function crear_backup($urlBackup, $uploadfile, $nombreArchivo, $extension)
     {
         $returnAux = true;
-        $nombreBackup = $this->renombrar_archivo_existente($nombreAlumno, $extension);
+        $backup = $this->renombrar_archivo_existente($urlBackup, $nombreArchivo, $extension);
 
-        if(!copy($uploadfile, $nombreBackup))
+        if(!copy($uploadfile, $backup))
             $returnAux = false;   
 
         return $returnAux;
@@ -48,7 +45,7 @@ class Alumno extends Persona {
         // Cargar la estampa y la foto para aplicarle la marca de agua
         $estampa = imagecreatefrompng($urlestampa);
         $im = imagecreatefromjpeg($urlimagen);
-        
+
         // Establecer los márgenes para la estampa y obtener el alto/ancho de la imagen de la estampa
         $margen_dcho = 10;
         $margen_inf = 10;
@@ -67,24 +64,27 @@ class Alumno extends Persona {
     //===================== POST ========================
 
     //para archivos
-    public function guardar_archivo($file)
+    public function guardar_archivo($file, $urlDestino, $nuevoNombre, $urlBackup, $urlEstampa)
     {    
+        //inicializo variables de retorno de informacion
         $returnAux = "No se pudo guardar el archivo" . PHP_EOL;
         $returnAuxBackup = "";
-        $nombreAlumno = "";
-        $extension = "";     
+        
+        //obtengo extension del archivo
+        $fileNameArray = explode('.', $file['imagen']['name']);
+        $extension = "." . $fileNameArray[count($fileNameArray)-1];  
 
-        $uploadfile = $this->renombrar_archivo($file, $nombreAlumno, $extension);
+        $uploadfile = $this->renombrar_archivo($urlDestino, $nuevoNombre, $extension);
 
         if(file_exists($uploadfile))
         {
             $returnAuxBackup = "Archivo existente. Se crea backup." . PHP_EOL;
-            if(!$this->crear_backup($uploadfile, $nombreAlumno, $extension))
+            if(!$this->crear_backup($urlBackup, $uploadfile, $nuevoNombre, $extension))
                 $returnAuxBackup = "Archivo existente. No se pudo crear backup." . PHP_EOL;
         }     
 
         if(move_uploaded_file($file['imagen']['tmp_name'], $uploadfile))
-            $this->insertar_estampa($uploadfile, ARCHIVOS . "/marca-de-agua.png");
+            $this->insertar_estampa($uploadfile, $urlEstampa);
             $returnAux = "Se guardo el archivo!" . PHP_EOL;            
 
         return $returnAuxBackup . $returnAux;
