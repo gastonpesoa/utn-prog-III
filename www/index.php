@@ -2,18 +2,24 @@
 require_once 'settings.php';
 
 $dato = $_SERVER['REQUEST_METHOD'];
-echo $dato .PHP_EOL;
+echo $dato . PHP_EOL;
 
-if($dato == "POST")        
-    require_once FUNCIONES.'/CrearAlumno.php';
+switch($dato)
+{
+    case "POST":
+        require_once FUNCIONES.'/CrearAlumno.php';
+        break;
 
-if($dato == "GET")    
-    require_once FUNCIONES.'/ListarAlumno.php';
+    case "GET":
+        require_once FUNCIONES.'/ListarAlumno.php';
+        break;
 
-if($dato == "DELETE")    
-    require_once FUNCIONES.'/BorrarAlumno.php';    
+    case "PUT":
+        require_once FUNCIONES.'/ModificarAlumno.php';
+        break;
 
-if($dato == "PUSH")    
-    require_once FUNCIONES.'/ModificarAlumno.php';        
-    
+    case "DELETE":
+        require_once FUNCIONES.'/BorrarAlumno.php';
+        break;
+}         
 ?>   

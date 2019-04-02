@@ -1,6 +1,6 @@
 <?php
 require_once CLASES."/alumno.php";
 
-// var_dump(Alumno::read("ListadoAlumno.txt"));
-var_dump(Alumno::read_json("ListadoAlumno.json"));
+// var_dump(Alumno::read(ARCHIVOS . "/ListadoAlumno.txt"));
+var_dump(Alumno::leer_json_array(ARCHIVOS . "/ListadoAlumno.json"));
 ?>
