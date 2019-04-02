@@ -38,6 +38,36 @@ class Alumno extends Persona {
         }
     }
 
+    function guardar_archivo($file)
+    {    
+        $returnAux = "No se pudo guardar el archivo";
+
+        $nameimagen = explode('.', $file['imagen']['name']);
+        $extension = "." . $nameimagen[count($nameimagen)-1];
+        $name = "{$this->legajo}-{$this->nombre}";
+        $namenuevo = $name . $extension;                
+        $uploadfile = FOTOS . $namenuevo;
+
+        $this->existe_archivo($uploadfile, $name, $extension);        
+
+        if(move_uploaded_file($file['imagen']['tmp_name'], $uploadfile))
+            $returnAux = "Se guardo el archivo!";            
+
+        return $returnAux;
+    }
+
+    function existe_archivo($uploadfile, $name, $extension)
+    {
+        if(file_exists($uploadfile))
+        {
+            $hoy = date("-d-m-Y");
+            $namebackup = FOTOSBACKUP . $name . $hoy . $extension; 
+
+            if(!copy($uploadfile, $namebackup))
+                return "No se pudo crear backup";                         
+        }        
+    }
+
     public static function leer_json($path){
         $file = fopen($path, "r") or die("No se puede leer el archivo!");
         $array = array(json_decode($path, true));
@@ -45,19 +75,17 @@ class Alumno extends Persona {
     }
 
     public static function leer($path){
-        
-        if(file_exists($path)){
-            $myfile = fopen($path, "r");
-            // $datos = fread($myfile,filesize($path));
-            while(!feof($path)){
-                $datos = fgets($myfile, filesize($path));
-                $data_array = explode(';',$datos);
-                $alumno = new Alumno($data_array[0],$data_array[1],$data_array[2],$data_array[3]);
-                $array_alumnos = array();
-                array_push($array_alumnos, $alumno);
-            }                
-            fclose($myfile);               
-        }
+            
+        $myfile = fopen($path, "r") or die("No se puede leer el archivo!");
+        // $datos = fread($myfile,filesize($path));
+        while(!feof($path)){
+            $datos = fgets($myfile);
+            $dataArray = explode(';',$datos);
+            $alumno = new Alumno($dataArray[0],$dataArray[1],$dataArray[2],$dataArray[3]);
+            $arrayAlumnos = array();
+            array_push($arrayAlumnos, $alumno);
+        }                
+        fclose($myfile);                       
         return $array_alumnos;
     }
 

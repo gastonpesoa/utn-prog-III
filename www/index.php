@@ -4,7 +4,7 @@ require_once 'settings.php';
 $dato = $_SERVER['REQUEST_METHOD'];
 echo $dato .PHP_EOL;
 
-if($dato == "POST")    
+if($dato == "POST")        
     require_once FUNCIONES.'/CrearAlumno.php';
 
 if($dato == "GET")    

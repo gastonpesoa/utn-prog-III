@@ -7,10 +7,14 @@ $dni = $_POST['dni'];
 $legajo = $_POST['legajo'];
 
 $myAlumno = new Alumno($nombre, $edad, $dni, $legajo);
+$myAlumno->guardar(ARCHIVOS."/ListadoAlumno.txt");
 
-$arrayAlumnos = array($myAlumno);
-//$myAlumno->guardar(ARCHIVOS."/ListadoAlumno.txt");
-$myAlumno->guardar_json(ARCHIVOS."/ListadoAlumno.json");
+if(isset($_FILES))
+{
+    echo $myAlumno->guardar_archivo($_FILES);        
+}
 
-var_dump($myAlumno->objeto_a_json());
+//$arrayAlumnos = array($myAlumno);
+//$myAlumno->guardar_json(ARCHIVOS."/ListadoAlumno.json");
+//var_dump($myAlumno->objeto_a_json());
 ?>

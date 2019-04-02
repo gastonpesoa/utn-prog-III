@@ -2,7 +2,26 @@
 json
 array de json
 
+leer json devolver array
+
 CrearAlumno.php -> POST
 ListarAlumno.php -> GET
 BorrarAlumno.php -> DELETE
 ModificarAlumno.php -> PUSH
+
+subir imagenes
+guardarlas por legapellido.extencion
+si ya existe a backup legapellido+fecha.extencion
+
+buscar en postman como subir un arch y del otro lado como recibirlo
+
+marca de agua
+
+3 punto
+cargo el array
+hago el proceso
+escribo el array
+
+post - crear - txt
+            - json por linea
+            - array json - lo levanto lo paso a un array le agrego el nuevo elemento y lo vuelvo a guardar
