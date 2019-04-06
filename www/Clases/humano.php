@@ -12,7 +12,7 @@ class Humano{
     }
 
     public function objeto_a_json(){
-        return json_encode($this);
+        return json_encode($this) . PHP_EOL;;
     }
 }
 ?>

@@ -7,13 +7,17 @@ $edad = $_POST['edad'];
 $dni = $_POST['dni'];
 $legajo = $_POST['legajo'];
 
-$myAlumno = new Alumno($nombre, $apellido, $edad, $dni, $legajo);
-echo $myAlumno->guardar_txt(ARCHIVOS . "/ListadoAlumno.txt");
+//$myAlumno = new Alumno($nombre, $apellido, $edad, $dni, $legajo);
+
+
+//echo $myAlumno->guardar_txt(ARCHIVOS . "/ListadoAlumno.txt");
+
 //echo $myAlumno->guardar_json(ARCHIVOS . "/ListadoAlumno.json");
+//echo $myAlumno->guardar_json_array(ARCHIVOS . "/ListadoAlumno.json");
 
 //var_dump($_FILES);
-if(!empty($_FILES['imagen']))
-    $myAlumno->con_foto($_FILES, FOTOS, FOTOS_BACKUP, URL_ESTAMPA);  
+// if(!empty($_FILES['imagen']))
+//     $myAlumno->con_foto($_FILES, FOTOS, FOTOS_BACKUP, URL_ESTAMPA);  
 
 // if (!empty($_FILES['imagen'])) 
 //     if(is_uploaded_file($_FILES['imagen']['tmp_name']) || file_exists($_FILES['imagen']['tmp_name']))
@@ -21,5 +25,5 @@ if(!empty($_FILES['imagen']))
 
 //$arrayAlumnos = array($myAlumno);
 //
-var_dump($myAlumno->objeto_a_json());
+//var_dump($myAlumno->objeto_a_json());
 ?>

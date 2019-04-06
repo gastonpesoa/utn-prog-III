@@ -26,6 +26,12 @@ class Alumno extends Persona {
     //===================== METODOS PRIVADOS ========================
 
     //para archivos
+    private static function get_extension($file)
+    {
+        $fileNameArray = explode('.', $file['imagen']['name']);
+        return $extension = "." . $fileNameArray[count($fileNameArray)-1]; 
+    }
+
     private function renombrar_archivo($urlDestino, $nombreArchivo, $extension)
     {            
         return $urlDestino . $nombreArchivo . $extension; 
@@ -78,9 +84,7 @@ class Alumno extends Persona {
         $returnAux = "No se pudo guardar el archivo" . PHP_EOL;
         $returnAuxBackup = "";
         
-        //obtengo extension del archivo
-        $fileNameArray = explode('.', $file['imagen']['name']);
-        $extension = "." . $fileNameArray[count($fileNameArray)-1];  
+        $extension = Alumno::get_extension($file); 
 
         $uploadfile = $this->renombrar_archivo($urlDestino, $nuevoNombre, $extension);
 
@@ -105,8 +109,8 @@ class Alumno extends Persona {
         $returnAux = "Se escribió el dato en el archivo txt." . PHP_EOL;
 
         file_exists($path) ? $file = fopen($path, "at") : $file = fopen($path, "wt");   
-
-        $data = "{$this->nombre};{$this->apellido};{$this->edad};{$this->dni};{$this->legajo};".PHP_EOL;
+        //$data =  "{$this->nombre};{$this->apellido};{$this->edad};{$this->dni};{$this->legajo};".PHP_EOL;
+        $data = $this->mostrar();
         if(!fwrite($file,$data))
             $returnAux = "No se pudo escribir el archivo txt.".PHP_EOL;         
             
@@ -130,39 +134,59 @@ class Alumno extends Persona {
 
     public function guardar_json_array($path)
     {
-        $arrayJson = Alumno::leer_json_array($path);
-        array_push($this);
+        $arrayAlumnos = Alumno::leer_json_array($path);   
+        array_push($arrayAlumnos, $this);
+        $file = fopen($path, "wt"); 
+        fwrite($file, json_encode($arrayAlumnos));
+        fclose($file);
     }
 
     //===================== GET ========================
 
     //para txt
-    public static function leer($path){
-            
-        $myfile = fopen($path, "r") or die("No se puede abrir el archivo!" . PHP_EOL);
-        // $datos = fread($myfile,filesize($path));
-        while(!feof($path)){
-            $datos = fgets($myfile);
-            $dataArray = explode(';',$datos);
-            $alumno = new Alumno($dataArray[0],$dataArray[1],$dataArray[2],$dataArray[3]);
-            $arrayAlumnos = array();
-            array_push($arrayAlumnos, $alumno);
-        }                
-        fclose($myfile);                       
-        return $array_alumnos;
+    public static function txt_a_array($path)
+    {
+        $arrayAlumnos = array();
+        if(file_exists($path))
+        {
+            $myfile = fopen($path, "r");
+            while(!feof($myfile))
+            {                
+                $datos = fgets($myfile);                
+                if($datos == null)
+                    break;
+
+                $dataArray = explode(';',$datos);
+                if(count($dataArray) == 6 && trim($dataArray[0]) != "")
+                {
+                    $nombreAux = trim($dataArray[0]);
+                    $apellidoAux = trim($dataArray[1]);
+                    $edadAux = trim($dataArray[2]);
+                    $dniAux = trim($dataArray[3]);
+                    $legajoAux = trim($dataArray[4]);
+                    $alumno = new Alumno($nombreAux, $apellidoAux, $edadAux, $dniAux, $legajoAux);
+                    array_push($arrayAlumnos, $alumno);
+                }                
+            }                
+            fclose($myfile); 
+        }                              
+        return $arrayAlumnos;
     }
 
     //para json
-    public static function leer_json_array($path){
-
-        $file = fopen($path, "r") or die("No se puede abrir el archivo json." . PHP_EOL);
-        $datos = fread($file, filesize($path)) or die("No se puede leer el archivo json." . PHP_EOL);
-        $array = json_decode($datos, true);
+    public static function leer_json_array($path)
+    {
+        $array = array();
+        if(file_exists($path))
+        {
+            $file = fopen($path, "r");
+            $datos = fread($file, filesize($path));
+            $array = json_decode($datos, true);
+            fclose($file);
+        }            
         return $array;
     }
-
     
-
     public static function LeerAlumnoJSON($path){
         if(file_exists($path)){
             $myfile = fopen($path, "r");
@@ -172,9 +196,22 @@ class Alumno extends Persona {
         return json_decode($datos);
     }
 
-    // public static function MostrarAlumno($alumno){
-    //     implode()
-    //     $data_array = explode(';',$data);
-    // }
+    public static function mostrar_alumnos($path)
+    {
+        echo "NOMBRE;APELLIDO;EDAD;DNI;LEGAJO". PHP_EOL;
+        $arrayAlumnos = Alumno::txt_a_array($path);
+        if($arrayAlumnos != null)
+        {
+            foreach($arrayAlumnos as $alumno)
+            {
+                echo $alumno->mostrar();
+            }
+        }
+    }
+
+    public function mostrar()
+    {
+        return "{$this->nombre};{$this->apellido};{$this->edad};{$this->dni};{$this->legajo};" . PHP_EOL;
+    }
 }
 ?>
