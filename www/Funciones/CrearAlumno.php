@@ -13,8 +13,7 @@ echo $myAlumno->guardar_txt(ARCHIVOS . "/ListadoAlumno.txt");
 
 //var_dump($_FILES);
 if(!empty($_FILES['imagen']))
-    $nombreArchivo = "{$myAlumno->legajo}_{$myAlumno->apellido}"; 
-    echo $myAlumno->guardar_archivo($_FILES, FOTOS, $nombreArchivo, FOTOS_BACKUP, URL_ESTAMPA);  
+    $myAlumno->con_foto($_FILES, FOTOS, FOTOS_BACKUP, URL_ESTAMPA);  
 
 // if (!empty($_FILES['imagen'])) 
 //     if(is_uploaded_file($_FILES['imagen']['tmp_name']) || file_exists($_FILES['imagen']['tmp_name']))
@@ -22,5 +21,5 @@ if(!empty($_FILES['imagen']))
 
 //$arrayAlumnos = array($myAlumno);
 //
-//var_dump($myAlumno->objeto_a_json());
+var_dump($myAlumno->objeto_a_json());
 ?>

@@ -6,14 +6,22 @@ class Alumno extends Persona {
     //=====================  PROPIEDADES ===================== 
 
     public $legajo;
-    
+    public $foto;
+
     //===================== CONSTRUCTOR ===================== 
 
     public function __construct($nombre, $apellido, $edad, $dni, $legajo)
     {
         parent::__construct($nombre, $apellido, $edad, $dni);
         $this->legajo = $legajo;
-    }  
+    }
+    
+    public function con_foto($file, $urlFotos, $urlFotosBackup, $urlFotosEstampa)
+    {
+        $nombreArchivo = "{$this->legajo}_{$this->apellido}"; 
+        $foto = $this->guardar_archivo($file, $urlFotos, $nombreArchivo, $urlFotosBackup, $urlFotosEstampa);  
+        $this->foto = $foto;
+    }
 
     //===================== METODOS PRIVADOS ========================
 
@@ -87,7 +95,8 @@ class Alumno extends Persona {
             $this->insertar_estampa($uploadfile, $urlEstampa);
             $returnAux = "Se guardo el archivo!" . PHP_EOL;            
 
-        return $returnAuxBackup . $returnAux;
+        //return $returnAuxBackup . $returnAux;
+        return $uploadfile;
     }    
     
     //para txt
