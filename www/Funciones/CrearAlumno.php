@@ -17,13 +17,13 @@ else
     $myAlumno = new Alumno($nombre, $apellido, $edad, $dni, $legajo);
 }
 echo $myAlumno->guardar_txt(ARCHIVOS . "/ListadoAlumno.txt");
-
+ 
 // $myAlumno = new Alumno($nombre, $apellido, $edad, $dni, $legajo);
 // echo $myAlumno->guardar_txt(ARCHIVOS . "/ListadoAlumno.txt");
 //echo $myAlumno->guardar_json(ARCHIVOS . "/ListadoAlumno.json");
 
 //var_dump($_FILES);
-// if(!empty($_FILES['imagen']))
+// if(!empty($_FILES['imagen'])) 
 //     $nombreArchivo = "{$myAlumno->legajo}_{$myAlumno->apellido}"; 
 //     echo $myAlumno->guardar_archivo($_FILES, FOTOS, $nombreArchivo, FOTOS_BACKUP, URL_ESTAMPA);  
 
