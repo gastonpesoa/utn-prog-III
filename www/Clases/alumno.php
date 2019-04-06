@@ -6,33 +6,55 @@ class Alumno extends Persona {
     //=====================  PROPIEDADES ===================== 
 
     public $legajo;
+    public $foto;
     
-    //===================== CONSTRUCTOR ===================== 
+    //===================== CONSTRUCTORES ===================== 
 
     public function __construct($nombre, $apellido, $edad, $dni, $legajo)
     {
         parent::__construct($nombre, $apellido, $edad, $dni);
         $this->legajo = $legajo;
-    }  
+    }
+    
+    public static function con_foto($nombre, $apellido, $edad, $dni, $legajo, $foto)
+    {
+        $alumno = new self($nombre, $apellido, $edad, $dni, $legajo);
+        $alumno->set_foto($foto);
+        return $alumno;
+    }
+
+    //===================== SETERS ================================
+
+    private function set_foto($foto)
+    {
+        if($foto != null)
+            $this->foto = $foto;
+    }
 
     //===================== METODOS PRIVADOS ========================
 
     //para archivos
-    private function renombrar_archivo($urlDestino, $nombreArchivo, $extension)
+    private static function get_extension($file)
+    {
+        $fileNameArray = explode('.', $file['imagen']['name']);
+        return $extension = "." . $fileNameArray[count($fileNameArray)-1]; 
+    }
+
+    private static function renombrar_archivo($urlDestino, $nombreArchivo, $extension)
     {            
         return $urlDestino . $nombreArchivo . $extension; 
     }
 
-    private function renombrar_archivo_existente($urlBackup, $nombreArchivo, $extension)
+    private static function renombrar_archivo_existente($urlBackup, $nombreArchivo, $extension)
     {   
         $hoy = date("_d-m-Y");
         return $urlBackup . $nombreArchivo . $hoy . $extension;
     }
 
-    private function crear_backup($urlBackup, $uploadfile, $nombreArchivo, $extension)
+    private static function crear_backup($urlBackup, $uploadfile, $nombreArchivo, $extension)
     {
         $returnAux = true;
-        $backup = $this->renombrar_archivo_existente($urlBackup, $nombreArchivo, $extension);
+        $backup = Alumno::renombrar_archivo_existente($urlBackup, $nombreArchivo, $extension);
 
         if(!copy($uploadfile, $backup))
             $returnAux = false;   
@@ -40,7 +62,7 @@ class Alumno extends Persona {
         return $returnAux;
     }
 
-    public function insertar_estampa($urlimagen, $urlestampa)
+    public static function insertar_estampa($urlimagen, $urlestampa)
     {
         // Cargar la estampa y la foto para aplicarle la marca de agua
         $estampa = imagecreatefrompng($urlestampa);
@@ -64,30 +86,17 @@ class Alumno extends Persona {
     //===================== POST ========================
 
     //para archivos
-    public function guardar_archivo($file, $urlDestino, $nuevoNombre, $urlBackup, $urlEstampa)
-    {    
-        //inicializo variables de retorno de informacion
-        $returnAux = "No se pudo guardar el archivo" . PHP_EOL;
-        $returnAuxBackup = "";
-        
-        //obtengo extension del archivo
-        $fileNameArray = explode('.', $file['imagen']['name']);
-        $extension = "." . $fileNameArray[count($fileNameArray)-1];  
-
-        $uploadfile = $this->renombrar_archivo($urlDestino, $nuevoNombre, $extension);
-
+    public static function guardar_archivo($file, $urlDestino, $nuevoNombre, $urlBackup, $urlEstampa)
+    {                    
+        $extension = Alumno::get_extension($file); 
+        $uploadfile = Alumno::renombrar_archivo($urlDestino, $nuevoNombre, $extension);
         if(file_exists($uploadfile))
-        {
-            $returnAuxBackup = "Archivo existente. Se crea backup." . PHP_EOL;
-            if(!$this->crear_backup($urlBackup, $uploadfile, $nuevoNombre, $extension))
-                $returnAuxBackup = "Archivo existente. No se pudo crear backup." . PHP_EOL;
-        }     
+            Alumno::crear_backup($urlBackup, $uploadfile, $nuevoNombre, $extension);
 
         if(move_uploaded_file($file['imagen']['tmp_name'], $uploadfile))
-            $this->insertar_estampa($uploadfile, $urlEstampa);
-            $returnAux = "Se guardo el archivo!" . PHP_EOL;            
+            Alumno::insertar_estampa($uploadfile, $urlEstampa);          
 
-        return $returnAuxBackup . $returnAux;
+        return $uploadfile;
     }    
     
     //para txt
