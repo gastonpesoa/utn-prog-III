@@ -25,3 +25,51 @@ escribo el array
 post - crear - txt
             - json por linea
             - array json - lo levanto lo paso a un array le agrego el nuevo elemento y lo vuelvo a guardar
+**************                archivo con renglones de JSON *
+
+BASE DE DATOS
+
+alias de SELECT -> trae distintos campos
+arma una nueva tabla -> conjuncion de datos de distintas tablas
+
+sql
+practica de pedir y q me traiga
+
+alumno
++id-localidad
+
+localidad
+id codigopostal nombre
+
+materia
+id descripcion
+
+materia-alumno
+idMateria PK
+idAlumno PK
+cuatrimestre PK
+nota
+
+INSERT 
+INSERT INTO `alumno`(`nombre`, `apellido`, `edad`, `dni`, `legajo`, `idLocalidad`) VALUES ("luis","luis",45,"45615965","45611",1)
+
+DELETE
+INSERT INTO `localidad`( `codigoPostal`, `nombre`) VALUES ("4567","Berazategui")
+
+UPDATE
+UPDATE `localidad` SET `id`=2,`codigoPostal`="7894",`nombre`="La Plata" WHERE id=2
+
+UPDATE `alumno` SET `idLocalidad`=2 WHERE id=2 OR id=3 OR id=5
+
+
+
+
+
+
+
+
+
+
+
+
+
