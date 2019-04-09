@@ -52,6 +52,8 @@ nota
 
 INSERT 
 INSERT INTO `alumno`(`nombre`, `apellido`, `edad`, `dni`, `legajo`, `idLocalidad`) VALUES ("luis","luis",45,"45615965","45611",1)
+INSERT INTO `materia-alumno`(`idMateria`, `idAlumno`) 
+VALUES (1,1), (2,2), (3,3), (1,5), (2,6), (3,7)  
 
 DELETE
 INSERT INTO `localidad`( `codigoPostal`, `nombre`) VALUES ("4567","Berazategui")
@@ -61,15 +63,99 @@ UPDATE `localidad` SET `id`=2,`codigoPostal`="7894",`nombre`="La Plata" WHERE id
 
 UPDATE `alumno` SET `idLocalidad`=2 WHERE id=2 OR id=3 OR id=5
 
+JOIN 
+SELECT a.nombre, l.nombre FROM alumno AS a , localidad AS l WHERE a.idLocalidad = l.id
+
+
+SELECT a.nombre, l.nombre, m.Descripcion 
+FROM alumno AS a , localidad AS l, materia AS m, materiaalumno AS w  
+WHERE m.id = w.idMateria AND a.id = w.idAlumno AND l.id = a.idLocalidad
+
+
+
+traer a todos los alumnos de la plata
+
+WHERE l.nombre = "La Plata"
+
+SELECT COUNT a.nombre AS cantidad
+----------------
+cargar NOTAS
+10,8,6,4,2,1
+
+notas entre 8 y 4
+BETWEEN
+en
 
 
 
 
+====================
 
+1
+juan
+juan
+22
+12345678
+1231
+1
+2019-04-08 20:06:28
 
+Editar Editar
+ Copiar Copiar
+ Borrar Borrar
+2
+pedro
+pedro
+22
+45678923
+4564
+2
+2019-04-08 20:06:28
 
+Editar Editar
+ Copiar Copiar
+ Borrar Borrar
+3
+paco
+paco
+52
+7563789
+1597
+2
+2019-04-08 20:13:07
 
+Editar Editar
+ Copiar Copiar
+ Borrar Borrar
+5
+luis
+luis
+45
+45615965
+45611
+2
+2019-04-08 20:20:05
 
+Editar Editar
+ Copiar Copiar
+ Borrar Borrar
+6
+rick
+rick
+78
+458787
+2
+4
+2019-04-08 21:27:46
 
-
-
+Editar Editar
+ Copiar Copiar
+ Borrar Borrar
+7
+ana
+ana
+23
+4565
+41
+4
+2019-04-08 21:27:46
