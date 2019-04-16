@@ -52,6 +52,11 @@ nota
 
 INSERT 
 INSERT INTO `alumno`(`nombre`, `apellido`, `edad`, `dni`, `legajo`, `idLocalidad`) VALUES ("luis","luis",45,"45615965","45611",1)
+
+INSERT INTO `Alumno`(`nombre`, `apellido`, `edad`, `dni`, `legajo`) 
+VALUES ("luis","luis",45,11111111,1), ("carlos","carlos",33,22222222,2) ,("juan","juan",55,33333333,3)
+
+
 INSERT INTO `materia-alumno`(`idMateria`, `idAlumno`) 
 VALUES (1,1), (2,2), (3,3), (1,5), (2,6), (3,7)  
 
@@ -159,3 +164,20 @@ ana
 41
 4
 2019-04-08 21:27:46
+
+==========================================================================
+
+ctr de copia 
+
+pdo php
+
+patron singleton
+
+=============================================================================
+
+
+INSERT INTO `Provedores`(`Numero`, `Nombre`, `Domicilio`, `Localidad`) 
+VALUES (100,"Perez","Peron 876","Quilmes"), 
+(101,"Gimenez","Mitre 150","Avellaneda") ,
+(102,"Aguirre","Boedo 634","Bernal")
+

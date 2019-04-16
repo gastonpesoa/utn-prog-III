@@ -1,0 +1,10 @@
+1.
+SELECT * FROM `Productos` ORDER BY pNombre
+2.
+SELECT * FROM `Provedores` WHERE Localidad='Quilmes'
+3.
+SELECT * FROM `Envios` WHERE Cantidad BETWEEN 200 AND 300
+4.
+SELECT SUM(Cantidad) FROM `Envios`
+5.
+SELECT pNumero FROM `Envios` LIMIT 3

@@ -14,17 +14,17 @@ require_once CLASES . "/alumno.php";
 //var_dump(Alumno::json_linea_a_array(ARCHIVOS . "/ListadoAlumnoLinea.json"));
 
 //================================= BY LEGAJO ==========================================
-
-$legajo = $_GET['legajo'];
-if(!empty($_GET['legajo']))
-{
-    echo "leo del txt" . PHP_EOL;
-    var_dump(Alumno::obtener_por_legajo_de_txt($legajo, ARCHIVOS . "/ListadoAlumno.txt"));
+var_dump(Alumno::traer_todos_los_alumnos()); 
+// $legajo = $_GET['legajo'];
+// if(!empty($_GET['legajo']))
+// {
+//     echo "leo del txt" . PHP_EOL;
+//     var_dump(Alumno::obtener_por_legajo_de_txt($legajo, ARCHIVOS . "/ListadoAlumno.txt"));
     
-    echo "leo del json" . PHP_EOL;
-    var_dump(Alumno::obtener_por_legajo_de_json($legajo, ARCHIVOS . "/ListadoAlumno.json"));
+//     echo "leo del json" . PHP_EOL;
+//     var_dump(Alumno::obtener_por_legajo_de_json($legajo, ARCHIVOS . "/ListadoAlumno.json"));
     
-    echo "leo del json linea" . PHP_EOL;
-    var_dump(Alumno::obtener_por_legajo_de_json_linea($legajo, ARCHIVOS . "/ListadoAlumnoLinea.json"));
-}
+//     echo "leo del json linea" . PHP_EOL;
+//     var_dump(Alumno::obtener_por_legajo_de_json_linea($legajo, ARCHIVOS . "/ListadoAlumnoLinea.json"));
+// }
 ?>

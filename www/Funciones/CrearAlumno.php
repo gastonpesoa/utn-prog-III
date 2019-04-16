@@ -1,13 +1,22 @@
 <?php
 require_once CLASES.'/alumno.php';
 
-$nombre = $_POST['nombre'];
-$apellido = $_POST['apellido'];
-$edad = $_POST['edad'];
-$dni = $_POST['dni'];
-$legajo = $_POST['legajo'];
+$datosPOST = fopen("php://input", "r");
+$datos = fread($datosPOST, 1024);
+$alumnoJSON = json_decode($datos);
 
-$myAlumno = new Alumno($nombre, $apellido, $edad, $dni, $legajo);
+//echo Alumno::dame_un_objeto_alumno($alumnoJSON);
+echo Alumno::guardar($alumnoJSON);
+
+//==========================================================================================
+
+// $nombre = $_POST['nombre'];
+// $apellido = $_POST['apellido'];
+// $edad = $_POST['edad'];
+// $dni = $_POST['dni'];
+// $legajo = $_POST['legajo'];
+
+// $myAlumno = new Alumno($nombre, $apellido, $edad, $dni, $legajo);
 
 //=================================== TXT ==========================================
 
@@ -15,7 +24,7 @@ $myAlumno = new Alumno($nombre, $apellido, $edad, $dni, $legajo);
 
 //=================================== JSON ==========================================
 
-echo $myAlumno->guardar_json_linea(ARCHIVOS . "/ListadoAlumnoLinea.json");
+//echo $myAlumno->guardar_json_linea(ARCHIVOS . "/ListadoAlumnoLinea.json");
 //echo $myAlumno->guardar_json(ARCHIVOS . "/ListadoAlumno.json");
 
 //============================ MANEJO DE ARCHIVOS ===================================

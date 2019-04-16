@@ -1,19 +1,33 @@
 <?php
 require_once CLASES . '/persona.php';
+require_once CLASES . '/AccesoDatos.php';
 
 class Alumno extends Persona {
 
     //=====================  PROPIEDADES ===================== 
 
+    public $id;
     public $legajo;
     public $foto;
 
     //===================== CONSTRUCTOR ===================== 
 
-    public function __construct($nombre, $apellido, $edad, $dni, $legajo)
+    // public function __construct($nombre, $apellido, $edad, $dni, $id, $legajo)
+    // {
+    //     parent::__construct($nombre, $apellido, $edad, $dni);
+    //     $this->legajo = $legajo;
+    //     $this->id = $id;
+    // }
+
+    public static function dame_un_objeto_alumno($json)
     {
-        parent::__construct($nombre, $apellido, $edad, $dni);
-        $this->legajo = $legajo;
+        $alumno = new Alumno();
+        $alumno->nombre = $json->nombre;
+        $alumno->apellido = $json->apellido;
+        $alumno->edad = $json->edad;
+        $alumno->dni = $json->dni;
+        $alumno->legajo = $json->legajo;
+        return $alumno;
     }
     
     public function con_foto($file, $urlFotos, $urlFotosBackup, $urlFotosEstampa)
@@ -25,7 +39,19 @@ class Alumno extends Persona {
 
     //===================== METODOS PUBLICOS ========================
 
-    
+    public static function guardar($json)
+    {
+        $alumno = Alumno::dame_un_objeto_alumno($json);
+        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+        $consulta =$objetoAccesoDato->RetornarConsulta("INSERT into Alumno (Nombre,Apellido,Edad,Dni,Legajo)values('$alumno->nombre','$alumno->apellido','$alumno->edad','$alumno->dni','$alumno->legajo')");
+        $consulta->bindValue(':Nombre',$alumno->nombre, PDO::PARAM_INT);
+        $consulta->bindValue(':Apellido', $alumno->apellido, PDO::PARAM_STR);
+        $consulta->bindValue(':Edad', $alumno->edad, PDO::PARAM_STR);
+        $consulta->bindValue(':Dni', $alumno->dni, PDO::PARAM_STR);
+        $consulta->bindValue(':Legajo', $alumno->legajo, PDO::PARAM_STR);
+        $consulta->execute();
+        return $objetoAccesoDato->RetornarUltimoIdInsertado();
+    }
 
     //===================== METODOS PRIVADOS ========================
     
@@ -87,6 +113,14 @@ class Alumno extends Persona {
     }
 
     //===================== GET ========================
+
+    public static function traer_todos_los_alumnos()
+    {
+        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+        $consulta =$objetoAccesoDato->RetornarConsulta("select * from Alumno");
+        $consulta->execute();			
+        return $consulta->fetchAll(PDO::FETCH_CLASS, "Alumno");	
+    }    
 
     //para txt
     public static function txt_a_array($path)
