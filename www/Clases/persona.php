@@ -1,5 +1,5 @@
 <?php
-require_once CLASES.'/humano.php';
+require_once CLASES.'/Humano.php';
 
 class Persona extends Humano 
 {

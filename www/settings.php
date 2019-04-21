@@ -7,4 +7,6 @@ define('FOTOS', UBICACION . "/Fotos/");
 define('FOTOS_BACKUP', UBICACION . "/FotosBACKUP/");
 
 define('URL_ESTAMPA', ARCHIVOS . "/marca-de-agua.png");
+
+define('TABLA_ALUMNO', "Alumno")
 ?>

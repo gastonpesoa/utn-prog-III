@@ -181,3 +181,6 @@ VALUES (100,"Perez","Peron 876","Quilmes"),
 (101,"Gimenez","Mitre 150","Avellaneda") ,
 (102,"Aguirre","Boedo 634","Bernal")
 
+ALTER TABLE tablename AUTO_INCREMENT = 1
+
+======================================================

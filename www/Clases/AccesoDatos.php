@@ -6,26 +6,26 @@ class AccesoDatos
  
     private function __construct()
     {
-        try { 
+        //try { 
             $this->objetoPDO = new PDO('mysql:host=localhost;dbname=utn_prog_III;charset=utf8', 'root', '', array(PDO::ATTR_EMULATE_PREPARES => false,PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
             $this->objetoPDO->exec("SET CHARACTER SET utf8");
-            } 
-        catch (PDOException $e) { 
-            print "Error!: " . $e->getMessage(); 
-            die();
-        }
+        // } 
+        // catch (PDOException $e) { 
+        //     print "Error en ctor AD!: " . $e->getMessage(); 
+        //     die();
+        // }
     }
  
-    public function RetornarConsulta($sql)
+    public function GetQuery($sql)
     { 
         return $this->objetoPDO->prepare($sql); 
     }
-     public function RetornarUltimoIdInsertado()
+     public function GetLastInsertedId()
     { 
         return $this->objetoPDO->lastInsertId(); 
     }
  
-    public static function dameUnObjetoAcceso()
+    public static function GetObjectAccesoDatos()
     { 
         if (!isset(self::$ObjetoAccesoDatos)) {          
             self::$ObjetoAccesoDatos = new AccesoDatos(); 

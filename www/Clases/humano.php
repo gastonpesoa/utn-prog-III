@@ -11,7 +11,7 @@ class Humano{
     //     $this->edad = $edad;
     // }
 
-    public function objeto_a_json(){
+    public function ObjectToJson(){
         return json_encode($this) . PHP_EOL;
     }
 }
