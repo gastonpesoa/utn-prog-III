@@ -1,16 +1,8 @@
 <?php
-require_once CLASES.'/Alumno.php';
-require_once CLASES.'/Archivo.php';
-
-$fileJsonAlumnos = new Archivo(ARCHIVOS . "/ListadoAlumno.json");
-$fileTxtAlumnos = new Archivo(ARCHIVOS . "/ListadoAlumno.txt");
-
-$datos = file_get_contents("php://input");
 
 //Caso: POST from BODY ROW
 if($_POST == null && $datos != null && $_SERVER["CONTENT_TYPE"] == "application/json")
-{
-    $json = json_decode($datos);
+{    
     //Si el contenido no es array u objeto, son lineas de JSON
     if((!is_array($json) && !is_object($json)) && $datos != null)
     {
@@ -33,7 +25,6 @@ if($_POST == null && $datos != null && $_SERVER["CONTENT_TYPE"] == "application/
     else
     {
         //Si el contenido es un array de JSON
-        $json = json_decode($datos);  
         if(is_array($json))
         {
             $arrayAlumnos = Alumno::StdClassArrayToAlumnosArray($json);           
@@ -79,8 +70,8 @@ if($_POST == null && $datos != null && $_SERVER["CONTENT_TYPE"] == "application/
 else
 {
     //Caso: POST by PARAMS
-    if(isset($_POST['nombre'])){
-
+    if(isset($_POST['nombre']))
+    {
         $nombre = $_POST['nombre'];   
         if(isset($_POST['apellido'])) {
             $apellido = $_POST['apellido'];       
@@ -98,7 +89,8 @@ else
         //     $id = $_POST['id'];       
         // } 
         //Con FILE
-        if(!empty($_FILES['imagen'])){  
+        if(!empty($_FILES['imagen']))
+        {  
             $nombreArchivo = "{$legajo}_{$apellido}"; 
             $fotosFile = new Archivo(FOTOS);
             try

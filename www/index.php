@@ -1,12 +1,17 @@
 <?php
 require_once 'settings.php';
+require_once CLASES.'/Alumno.php';
+require_once CLASES.'/Archivo.php';
 
 $method = $_SERVER['REQUEST_METHOD'];
-echo $method . PHP_EOL;
 $datos = file_get_contents("php://input");
+$json = json_decode($datos);
+$fileJsonAlumnos = new Archivo(ARCHIVOS . "/ListadoAlumno.json");
+$fileTxtAlumnos = new Archivo(ARCHIVOS . "/ListadoAlumno.txt");
 
-switch($method){
-    
+echo $method . PHP_EOL;
+switch($method)
+{
     case "POST":
         require_once FUNCIONES.'/CrearAlumno.php';
         break;       
