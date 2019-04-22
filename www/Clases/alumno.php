@@ -131,13 +131,13 @@ class Alumno extends Persona {
         } 
     }
 
-    public function GetAlumnoSiete($id, $nombre, $apellido, $edad, $dni, $legajo, $foto) {
+    // public function GetAlumnoSiete($nombre, $apellido, $edad, $dni, $legajo, $fotoRuta, $foto) {
         
-        $this->GetAlumnoSeis($nombre, $apellido, $edad, $dni, $legajo, $foto);
-        if (isset($id)) {
-            $this->id = $id;
-        }
-    }
+    //     $this->GetAlumnoSeis($nombre, $apellido, $edad, $dni, $legajo, $foto);
+    //     if (isset($foto)) {
+    //         $this->foto = $foto;
+    //     }
+    // }
 
     public static function GetObjectAlumno()
     {
@@ -159,15 +159,19 @@ class Alumno extends Persona {
                 break;
 
             case 5: 
+                //($nombre, $apellido, $edad, $dni, $legajo)
                 $alumno->GetAlumnoCinco(func_get_arg(0),func_get_arg(1),func_get_arg(2),func_get_arg(3),func_get_arg(4));
                 break;            
-            case 6;                
+            case 6; 
+                             
                 if((func_get_arg(0) == 'id'))
                 {
+                    //($id, $nombre, $apellido, $edad, $dni, $legajo)
                     $alumno->GetAlumnoSeisId(func_get_arg(0),func_get_arg(1),func_get_arg(2),func_get_arg(3),func_get_arg(4),func_get_arg(5));                    
                 }
                 else
                 {
+                    //($nombre, $apellido, $edad, $dni, $legajo, $foto)  
                     $alumno->GetAlumnoSeis(func_get_arg(0),func_get_arg(1),func_get_arg(2),func_get_arg(3),func_get_arg(4),func_get_arg(5));    
                     // $arrayParams = array("nombre", "apellido", "edad", "dni", "legajo", "foto");
                     // for ($i = 0; $i < $numargs; $i++) {
@@ -175,14 +179,31 @@ class Alumno extends Persona {
                     // }   
                 }                    
                 break; 
-            case 7:
-                $alumno->GetAlumnoSiete(func_get_arg(0),func_get_arg(1),func_get_arg(2),func_get_arg(3),func_get_arg(4),func_get_arg(5),func_get_arg(6),func_get_arg(6));
-                break;
+            // case 7:
+            //     $alumno->GetAlumnoSiete(func_get_arg(0),func_get_arg(1),func_get_arg(2),func_get_arg(3),func_get_arg(4),func_get_arg(5),func_get_arg(6),func_get_arg(6));
+            //     break;
             default:
                 break;
         }        
         return $alumno;        
     }    
+    
+    public function IdIsSet()
+    {
+        return isset($this->id);       
+    }
+
+    public static function VerifyIfAnyObjectHasIdSet($array)
+    {
+        $returnAux = false;
+        foreach($array as $alumno){
+            if($alumno->IdIsSet()){
+                $returnAux = true;
+                break;
+            }                
+        }
+        return $returnAux;
+    }
 
     //===================== ALTA =======================    
 
@@ -358,7 +379,128 @@ class Alumno extends Persona {
         return $result;
     } 
 
-    //===================== GETERS ============================
+    //===================== LISTAR ============================
+    
+    public static function SortArrayByKey($array, $key, $order)
+    {
+        foreach($array as $k => $v)
+        {
+            $b[] = strtolower($v->$key);
+        }
+        if($order == 1)
+            asort($b);
+        if($order == -1)
+            arsort($b);
+        foreach($b as $k=>$v)
+        {
+            $c[] = $array[$k];
+        }
+        return $c;
+    }
+
+    public static function GetJsonAlumnoInDbById($id)
+    {
+        $alumno = Alumno::GetAlumnoById($id);
+        $alumnoJson = json_encode($alumno);
+        return $alumnoJson;
+    }
+
+    public static function GetJsonAlumnoInDbByLegajo($legajo)
+    {
+        $alumno = Alumno::GetAlumnoByLegajo($legajo);
+        $alumnoJson = json_encode($alumno);
+        return $alumnoJson;
+    }
+
+    public static function GetJsonAlumnoInDbByDni($dni)
+    {
+        $alumno = Alumno::GetAlumnoByDni($dni);
+        $alumnoJson = json_encode($alumno);
+        return $alumnoJson;
+    }
+
+    public static function GetJsonAlumnoInDbByDniOrLegajo($dni)
+    {
+        $alumno = Alumno::GetAlumnoByLegajoOrDni($dni);
+        $alumnoJson = json_encode($alumno);
+        return $alumnoJson;
+    }
+
+    public static function GetJsonArrayAlumnosInDb()
+    {
+        $arrayAlumnos = Alumno::GetAllAlumnos();        
+        $arrayJson = json_encode($arrayAlumnos);
+        return $arrayJson;
+    }
+
+    public static function GetJsonArrayAlumnosInDbSortedByKey($key, $order)
+    {
+        $arrayAlumnos = Alumno::GetAllAlumnos();  
+        $arrayOrdenado = Alumno::SortArrayByKey($arrayAlumnos, $key, $order);        
+        $arrayJson = json_encode($arrayOrdenado);
+        return $arrayJson;
+    }
+
+    public static function ShowAlumnosListSortedByKey($key, $order)
+    {        
+        $arrayAlumnos = Alumno::GetAllAlumnos();        
+        if($arrayAlumnos != null)
+        {    
+            $arrayOrdenado = Alumno::SortArrayByKey($arrayAlumnos, $key, $order);           
+            $format = sprintf("%-18s;%-18s;%-9s;%-15s;%-9s;" . PHP_EOL,
+                "Nombre","Apellido","Edad","DNI","Legajo");
+            echo $format;
+            foreach($arrayOrdenado as $alumno)
+            {
+                echo $alumno->ShowAlumno();
+            }
+        }
+        else
+        {
+            echo "Archivo vacío." . PHP_EOL;
+        }
+    }
+
+    public static function ShowAlumnosList()
+    {        
+        $arrayAlumnos = Alumno::GetAllAlumnos();        
+        if($arrayAlumnos != null)
+        {            
+            $format = sprintf("%-18s;%-18s;%-9s;%-15s;%-9s;" . PHP_EOL,
+                "Nombre","Apellido","Edad","DNI","Legajo");
+            echo $format;
+            foreach($arrayAlumnos as $alumno)
+            {
+                echo $alumno->ShowAlumno();
+            }
+        }
+        else
+        {
+            echo "Archivo vacío." . PHP_EOL;
+        }
+    }
+
+    public static function ShowTextList($path)
+    {
+        $format = sprintf("%-18s;%-18s;%-9s;%-9s;%-9s;" . PHP_EOL,
+            "Nombre","Apellido","Edad","DNI","Legajo");
+        echo $format;
+
+        $arrayAlumnos = Archivo::TextToArray($path);
+        if($arrayAlumnos != null)
+        {
+            foreach($arrayAlumnos as $alumno)
+            {
+                echo $alumno->ShowAlumno();
+            }
+        }
+        else
+        {
+            echo "Archivo vacío." . PHP_EOL;
+        }
+    }
+
+    //===================== GETTERS ============================
 
     public static function FilterDuplicates($array)
     {
@@ -421,6 +563,7 @@ class Alumno extends Persona {
     }
 
     //--------------------- JSON LINES  
+
     public static function JsonLinesInRowToAlumnosArray($path)
     {
         $arrayAlumnos = array();  
@@ -443,7 +586,8 @@ class Alumno extends Persona {
             array_push($arrayAlumnos, $alumno);                       
         }        
         return $arrayAlumnos;
-    }
+    }    
+
     //===================== METODOS DB ========================    
 
     public function InsertAlumno()
@@ -454,13 +598,15 @@ class Alumno extends Persona {
                     Apellido,
                     Edad,
                     Dni,
-                    Legajo)
+                    Legajo,                
+                    Foto)
                 values(
                     :Nombre,
                     :Apellido,
                     :Edad,
                     :Dni,
-                    :Legajo)";
+                    :Legajo,                    
+                    :Foto)";
         return $ObjetoAlumnoDatos->InsertAlumno($this, $query);
     }
 
@@ -496,7 +642,7 @@ class Alumno extends Persona {
         return $ObjetoAlumnoDatos->GetAlumno($query);
     }
 
-    public function GetAlumnoByLegajo() 
+    public static function GetAlumnoByLegajo($legajo) 
 	{
         $ObjetoAlumnoDatos = AlumnoDatos::GetObjectAlumnoDatos(TABLA_ALUMNO);
         $query = 'SELECT
@@ -509,11 +655,11 @@ class Alumno extends Persona {
                 FROM
                     ' . TABLA_ALUMNO . '
                 WHERE
-                    Legajo = ' . $this->legajo;
+                    Legajo = ' . $legajo;
         return $ObjetoAlumnoDatos->GetAlumno($query);
     }
 
-    public function GetAlumnoByDni() 
+    public static function GetAlumnoByDni($dni) 
 	{
         $ObjetoAlumnoDatos = AlumnoDatos::GetObjectAlumnoDatos(TABLA_ALUMNO);
         $query = 'SELECT
@@ -526,7 +672,7 @@ class Alumno extends Persona {
                 FROM
                     ' . TABLA_ALUMNO . '
                 WHERE
-                    Dni = ' . $this->dni;
+                    Dni = ' . $dni;
         return $ObjetoAlumnoDatos->GetAlumno($query);
     }
 
@@ -579,7 +725,7 @@ class Alumno extends Persona {
 
     public function ShowAlumno()
     {
-        $format = sprintf("%-18s;%-18s;%-9s;%-9s;%-9s;" . PHP_EOL,
+        $format = sprintf("%-18s;%-18s;%-9s;%-15s;%-9s;" . PHP_EOL,
             $this->nombre,$this->apellido,$this->edad,$this->dni,$this->legajo);
         return $format;
     }

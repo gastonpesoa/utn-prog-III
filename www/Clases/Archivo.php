@@ -87,12 +87,14 @@ class Archivo{
         return $returnAux;
     }
 
-    public function InsertWatermark($urlimagen, $urlestampa)
+    public function InsertWatermark($urlimagen, $urlestampa, $extension)
     {
         // Cargar la estampa y la foto para aplicarle la marca de agua
         $estampa = imagecreatefrompng($urlestampa);
-        $im = imagecreatefromjpeg($urlimagen);
-
+        if($extension == '.jpeg' || $extension == '.jpg')
+            $im = imagecreatefromjpeg($urlimagen);
+        if($extension == '.png')
+            $im = imagecreatefrompng($urlimagen);
         // Establecer los márgenes para la estampa y obtener el alto/ancho de la imagen de la estampa
         $margen_dcho = 10;
         $margen_inf = 10;
@@ -104,36 +106,31 @@ class Archivo{
         imagecopy($im, $estampa, imagesx($im) - $sx - $margen_dcho, imagesy($im) - $sy - $margen_inf, 0, 0, imagesx($estampa), imagesy($estampa));
 
         // Imprimir y liberar memoria
-        imagejpeg($im, $urlimagen);
+        if($extension == '.jpeg' || $extension == '.jpg')
+            imagejpeg($im, $urlimagen);
+        if($extension == '.png')
+            imagepng($im, $urlimagen);
+        
         imagedestroy($im);
     }
 
-    public function SaveFile($file, $nuevoNombre, $urlBackup, $urlEstampa)
-    {
-        //inicializo variables de retorno de informacion
-        $returnAux = "No se pudo guardar el archivo" . PHP_EOL;
-        $returnAuxBackup = "";
-
+    public function SaveFileDirectory($file, $nuevoNombre, $urlBackup, $urlEstampa)
+    {        
         $extension = $this->GetExtension($file);
-
         $uploadfile = $this->RenameFile($this->path, $nuevoNombre, $extension);
-
         if(file_exists($uploadfile))
-        {
-            $returnAuxBackup = "Archivo existente. Se crea backup." . PHP_EOL;
-            if(!$this->CreateBackup($urlBackup, $this->path, $nuevoNombre, $extension))
-                $returnAuxBackup = "Archivo existente. No se pudo crear backup." . PHP_EOL;
-        }
-
+            $this->CreateBackup($urlBackup, $uploadfile, $nuevoNombre, $extension);
         if(move_uploaded_file($file['imagen']['tmp_name'], $uploadfile))
-            $this->InsertWatermark($uploadfile, $urlEstampa);
-            $returnAux = "Se guardo el archivo!" . PHP_EOL;
-
-        //return $returnAuxBackup . $returnAux;
+            $this->InsertWatermark($uploadfile, $urlEstampa, $extension);
         return $uploadfile;
     }
 
-    // public function SaveFile($file, $urlDestino, $nuevoNombre, $urlBackup, $urlEstampa)
+    public function SaveFileInBase64($file)
+    {
+        return base64_encode(file_get_contents($file));
+    }
+
+    // public function SaveFileDirectory($file, $urlDestino, $nuevoNombre, $urlBackup, $urlEstampa)
     // {
     //     //inicializo variables de retorno de informacion
     //     $returnAux = "No se pudo guardar el archivo" . PHP_EOL;
@@ -156,27 +153,7 @@ class Archivo{
 
     //     //return $returnAuxBackup . $returnAux;
     //     return $uploadfile;
-    // }        
-
-    public static function ShowTextList($path)
-    {
-        $format = sprintf("%-18s;%-18s;%-9s;%-9s;%-9s;" . PHP_EOL,
-            "Nombre","Apellido","Edad","DNI","Legajo");
-        echo $format;
-
-        $arrayAlumnos = Archivo::TextToArray($path);
-        if($arrayAlumnos != null)
-        {
-            foreach($arrayAlumnos as $alumno)
-            {
-                echo $alumno->ShowAlumno();
-            }
-        }
-        else
-        {
-            echo "Archivo vacío." . PHP_EOL;
-        }
-    }
+    // }            
 
     public function SaveText($path)
     {

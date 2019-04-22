@@ -1,9 +1,9 @@
 Nombre;Apellido;Edad;Dni;Legajo
-Francisco;Pesoa;18;44561234;2345;
-dieciseis;dieciseis;16;16161616;16;
-Gaston;Pesoa;31;33594741;2;
-Emiliano;Pesoa;18;34567987;3;
-uno;uno;1;1111111;1;
-Jessica;Fukman;23;39594741;10;
-nueve;nueve;99;99999999;9;
-once;once;11;1010101010;11;
+uno;uno;1;11111111;1;
+dos;dos;22;22222222;2;
+tres;tres;33;33333333;3;
+cuatro;cuatro;44;44444444;4;
+cinco;cinco;55;55555555;5;
+seis;seis;66;66666666;6;
+siete;siete;77;77777777;7;
+ocho;ocho;88;88888888;8;

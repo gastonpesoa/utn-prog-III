@@ -24,7 +24,8 @@ class AlumnoDatos
         $consulta->bindValue(':Apellido', $alumno->apellido, PDO::PARAM_STR);
         $consulta->bindValue(':Edad', $alumno->edad, PDO::PARAM_INT);
         $consulta->bindValue(':Dni', $alumno->dni, PDO::PARAM_INT);
-        $consulta->bindValue(':Legajo', $alumno->legajo, PDO::PARAM_INT);        
+        $consulta->bindValue(':Legajo', $alumno->legajo, PDO::PARAM_INT);  
+        $consulta->bindValue(':Foto', $alumno->foto, PDO::PARAM_STR);        
         $consulta->execute();
         return $this->ObjetoAccesoDatos->GetLastInsertedId();
      }         
