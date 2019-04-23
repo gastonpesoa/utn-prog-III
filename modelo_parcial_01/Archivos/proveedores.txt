@@ -1,0 +1,4 @@
+Id;Nombre;Email;Foto
+1;unoModificado;unoModificado@mail.com;./Fotos/1_uno.jpg;
+2;dos;dos@mail.com;./Fotos/2_dos.jpg;
+3;tres;tres@mail.com;./Fotos/3_tres.jpg;

@@ -1,0 +1,5 @@
+Id;Nombre;Email;Foto
+2;gaseosa;5;
+2;gaseosa;5;
+2;caramelos;10;
+1;cigarrillos;10;
