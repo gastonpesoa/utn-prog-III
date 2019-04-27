@@ -8,3 +8,29 @@ SELECT * FROM `Envios` WHERE Cantidad BETWEEN 200 AND 300
 SELECT SUM(Cantidad) FROM `Envios`
 5.
 SELECT pNumero FROM `Envios` LIMIT 3
+6.
+SELECT a.Nombre, b.pNombre FROM Envios AS e, Provedores AS a, Productos AS b WHERE e.Numero = a.Numero AND e.pNumero = b.pNumero
+7.
+SELECT e.Cantidad * b.Precio FROM Envios AS e, Productos AS b WHERE e.pNumero = b.pNumero
+8.
+SELECT SUM(Cantidad) FROM Envios WHERE Numero = 102 AND pNumero = 1
+9.
+SELECT b.pNumero FROM Envios AS e, Provedores AS a, Productos AS b WHERE a.Localidad = 'Avellaneda' AND e.Numero = a.Numero AND e.pNumero = b.pNumero
+10.
+SELECT Domicilio, Localidad FROM Provedores WHERE Nombre LIKE '%I%'
+11.
+INSERT INTO Productos (pNumero, pNombre,Precio,Tamaño) VALUES (4,'Chocolate',23.35,'Chico')
+12.
+INSERT INTO Provedores (Numero) VALUES (103)
+13.
+INSERT INTO Provedores (Numero, Nombre, Localidad) VALUES (107,'Rosales','La Plata')
+14.
+UPDATE Productos SET Precio = 97.50 WHERE Tamaño = 'Grande' 
+15.
+UPDATE Productos AS b, Envios AS e SET b.Tamaño='Mediano' WHERE b.pNumero = e.pNumero AND e.Cantidad >= 300 AND b.Tamaño = 'Chico'
+16.
+DELETE FROM Productos WHERE pNumero = 1
+17.
+
+
+      

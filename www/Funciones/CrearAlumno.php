@@ -1,4 +1,7 @@
 <?php
+class CrearAlumno{
+    
+}
 // require_once CLASES.'/Alumno.php';
 // require_once CLASES.'/Archivo.php';
 
