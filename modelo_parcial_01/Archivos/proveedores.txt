@@ -1,4 +1,10 @@
 Id;Nombre;Email;Foto
-1;unoModificado;unoModificado@mail.com;./Fotos/1_uno.jpg;
-2;dos;dos@mail.com;./Fotos/2_dos.jpg;
-3;tres;tres@mail.com;./Fotos/3_tres.jpg;
+1;unomodificado;unoModificado@mail.com;./Fotos/1_uno.jpeg;
+2;dosmodificado;dosModificado@mail.com;./Fotos/2_dos.jpeg;
+3;tresmodificado;tresModificado@mail.com;./Fotos/3_tres.jpeg;
+4;cuatromodificado;cuatroModificado@mail.com;./Fotos/4_cuatro.jpeg;
+5;cincomodificado;cincoModificado@mail.com;./Fotos/5_cincomodificado.jpeg;
+6;seismodificado;seisModificado@mail.com;./Fotos/6_seisModificado.jpeg;
+7;sieteModificado;sieteModificado@mail.com;./Fotos/7_sieteModificado.jpeg;
+8;ocho;ocho@mail.com;./Fotos/8_ocho.jpeg;
+9;nueve;nueve@mail.com;./Fotos/9_nueve.jpeg;

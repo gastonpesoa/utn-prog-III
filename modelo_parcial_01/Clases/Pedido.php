@@ -1,142 +1,107 @@
 <?php
-class Pedido{
+class Pedido
+{
     public $id;
+    public $idProveedor;
     public $producto;
     public $cantidad;
 
-    public static function GetPedido($id, $producto, $cantidad) {
+    public static function GetPedido($id, $idProveedor, $producto, $cantidad) 
+    {
         $pedido = new Pedido();
-        if (isset($producto)) {
-            $pedido->producto = strtolower($producto);
-        } 
         if (isset($id)) {
             $pedido->id = $id;
-        } 
+        }
+        if (isset($idProveedor)) {
+            $pedido->idProveedor = $idProveedor;
+        }
+        if (isset($producto)) {
+            $pedido->producto = strtolower($producto);
+        }          
         if (isset($cantidad)) {
             $pedido->cantidad = $cantidad;
         }         
         return $pedido;
     }
 
-    public function CreateProperty($name, $value){
-        $this->{$name} = $value;
-    }
-
-    public static function StdClassToPedido($stdClass)
+    public static function GetLastIdInArray($array)
     {
-        $pedido = new Pedido();
-        $propertiesArray = get_object_vars($stdClass);                         
-        foreach ($propertiesArray as $nombre => $valor) {
-            if(isset($valor))
-                $pedido->CreateProperty($nombre, $valor);
-        }
-        return $pedido;
+        return $array[count($array) - 1]->id;
     }
 
-    //--------------------- TXT FILE
+    public static function AssignId($array)
+    {
+        $id = 1;
+        if(!is_null($array) && count($array) > 0) 
+        {   
+            $lastId = Pedido::GetLastIdInArray($array);
+            $id = $lastId + 1;                                                                                                                                                                                                                     
+        } 
+        return $id;
+    }
 
-    public static function InsertPedidoInTxtFile($fileTxtPedidos, $pedido, $fileProv)
-    {        
-        $result = null;
-        $arrayTxtInFile = Pedido::TextToPedidosArray($fileTxtPedidos,';');
-        
-        if(!is_null($arrayTxtInFile) && count($arrayTxtInFile) > 0)
-        { 
-            $existeProv = Proveedor::GetProveedorByIdFromTxt($pedido->id, $fileProv);
-            if($existeProv!=null)
-            {
-                array_push($arrayTxtInFile, $pedido);
-            } 
-            $result = Pedido::PedidosArrayToTxtFile($fileTxtPedidos, $arrayTxtInFile);
-        }
-        else
+    public static function InsertPedido($fileTxtPedidos, $fileTxtProveedores, $idProveedor, $producto, $cantidad)
+    {
+        $result = "No existe proveedor con id " . $idProveedor . PHP_EOL;
+        $existeProv = Proveedor::GetProveedorByIdFromTxt($idProveedor, $fileTxtProveedores);
+        if(!is_null($existeProv))
         {
-            var_dump($pedido->id);
-            $existeProv = Proveedor::GetProveedorByIdFromTxt($pedido->id, $fileProv);
-            if($existeProv!=null)
-            {                
-                $result = Pedido::PedidosArrayToTxtFile($fileTxtPedidos, array($pedido));
-            }            
-        }        
-        return $result;       
+            $pedidos = Pedido::TextToPedidosArray($fileTxtPedidos,';');
+            $id = Pedido::AssignId($pedidos);
+            $pedido = Pedido::GetPedido($id, $idProveedor, $producto, $cantidad);                                           
+            array_push($pedidos, $pedido);
+            Pedido::PedidosArrayToTxtFile($fileTxtPedidos, $pedidos) != false ?
+                $result = "Se cargó pedido." . PHP_EOL :
+                $result = "Error al cargar.".PHP_EOL; 
+        }
+        return $result;
     }
 
     public static function TextToPedidosArray($txtFile, $separador)
     {
         $arrayPedidos = array();
         $arrayTxt = $txtFile->TextToArray();
-        foreach($arrayTxt as $row)
+        if(!is_null($arrayTxt) && count($arrayTxt) > 0)
         {
-            $dataArray = explode($separador,$row);
-            if(strtolower(trim($dataArray[0])) == 'id')
+            foreach($arrayTxt as $row)
             {
-                continue;
+                $dataArray = explode($separador, $row);
+                if(strtolower(trim($dataArray[0])) == 'id')
+                {
+                    continue;
+                }
+                else
+                {
+                    $id = trim($dataArray[0]);
+                    $idProveedor = trim($dataArray[1]);
+                    $producto = trim($dataArray[2]);
+                    $cantidad = trim($dataArray[3]);                
+                    $pedido = Pedido::GetPedido($id, $idProveedor, $producto, $cantidad);
+                    array_push($arrayPedidos, $pedido);
+                }
             }
-            else
-            {
-                $idAux = trim($dataArray[0]);
-                $productoAux = trim($dataArray[1]);
-                $cantidadAux = trim($dataArray[2]);                
-                $fotoAux = trim($dataArray[3]);
-                $pedido = Pedido::GetPedido($idAux, $productoAux, $cantidadAux, $fotoAux);
-                array_push($arrayPedidos, $pedido);
-            }
-        }        
-        return $arrayPedidos;
-    }
-
-    public function GetPedidoById($array)
-    {
-        $returnAux = null;
-        foreach($array as $pedido)
-        {
-            if($pedido->id == $this->id)
-            {
-                $returnAux = $pedido;
-                break;
-            }
-        }
-        return $returnAux;
-    }
-
-    public static function GetPedidoByNombreFromTxt($producto, $txtFile)
-    {
-        $returnAux = null;
-        $array = Pedido::TextToPedidosArray($txtFile, ';');
-
-        foreach($array as $pedido)
-        {
-            if($pedido->producto == $producto)
-            {
-                $returnAux = $pedido;
-                break;
-            }
-        }
-        if($returnAux!=null){
-            
-            $returnAux = $pedido;
         }                
-        return $returnAux;
+        return $arrayPedidos;
     }
 
-    public static function GetPedidosByIdFromTxt($id, $txtFile)
-    {        
-        $returnAux = null;
-        $array = Pedido::TextToPedidosArray($txtFile, ';');
-        $arrayPedidos = array();
-        foreach($array as $pedido)
-        {
-            if($pedido->id == $id)
+    public static function GetPedidosByIdProveedorFromTxt($idProveedor, $txtFile)
+    {    
+        $pedidosProveedor = array();    
+        $pedidos = Pedido::TextToPedidosArray($txtFile, ';');
+        if(!is_null($pedidos) && count($pedidos) > 0)
+        {            
+            foreach($pedidos as $pedido)
             {
-                array_push($arrayPedidos, $pedido);
+                if($pedido->idProveedor == $idProveedor)                
+                    array_push($pedidosProveedor, $pedido);                
             }
-        }              
-        return $arrayPedidos;
+        }                      
+        return $pedidosProveedor;
     }    
 
     public function PedidosArrayToTxtFile($fileTxtPedidos, $array)
     {
-        $string = 'Id;Nombre;Email;Foto'.PHP_EOL;
+        $string = 'Id;Id Proveedor;Producto;Cantidad;'.PHP_EOL;
         $arrayInserts = array();
         foreach($array as $element)
         {
@@ -148,61 +113,59 @@ class Pedido{
 
     private function ToString()
     {
-        return "{$this->id};{$this->producto};{$this->cantidad};" . PHP_EOL;
-    } 
-
-    public function ShowPedido($prov)
+        return "{$this->id};{$this->idProveedor};{$this->producto};{$this->cantidad};" . PHP_EOL;
+    }
+    
+    public static function GetHeader()
     {
-        $format = sprintf("%-15s;%-8s;%-5s;%-20s;" . PHP_EOL,
-            $this->producto,$this->cantidad,$this->id,$prov->nombre);
+        $format = sprintf("|%-15s|%-10s|%-15s|%-30s|" . PHP_EOL,
+            "Producto","Cantidad","Id Proveedor","Proveedor");
         return $format;
     }
 
-    public function ShowPedidoProps()
+    public function ShowPedido($prov)
     {
-        $format = sprintf("%-15s;%-8s;%-5s;" . PHP_EOL,
-            $this->producto,$this->cantidad,$this->id);
+        $format = sprintf("|%-15s|%-10s|%-15s|%-30s|" . PHP_EOL,
+            $this->producto,$this->cantidad,$this->idProveedor,$prov->nombre);
         return $format;
     }
 
     public function ShowPedidoWithHeader()
-    {        
-        $format = sprintf("%-15s;%-8s;%-5s;%-20s;" . PHP_EOL,
-            "Producto","Cantidad","Id","Proveedor");
-        echo $format;
-        echo $this->ShowPedido();
+    {
+        $header = Pedido::GetHeader();
+        $pedido = $this->ShowPedido();
+        return $header . $pedido;
     } 
 
-    public static function ShowTextList($path, $txtFile)
-    {
-        $format = sprintf("%-15s;%-8s;%-5s;%-20s;" . PHP_EOL,
-        "Producto","Cantidad","Id","Proveedor");
-        echo $format;
-
-        $array = Pedido::TextToPedidosArray($path, ';');
-        
-        if($array != null)
+    public static function ShowPedidos($txtPedidos, $txtProveedores)
+    {   
+        $result = "Archivo vacío." . PHP_EOL;     
+        $array = Pedido::TextToPedidosArray($txtPedidos, ';');        
+        if(!is_null($array) && count($array) > 0)
         {
+            $result = Pedido::GetHeader();
             foreach($array as $pedido)
             {
-                $prov = Proveedor::GetProveedorByIdFromTxt($pedido->id, $txtFile);
-                echo $pedido->ShowPedido($prov);
+                $prov = Proveedor::GetProveedorByIdFromTxt($pedido->idProveedor, $txtProveedores);
+                $result .= $pedido->ShowPedido($prov);
             }
         }
-        else
-        {
-            echo "Archivo vacío." . PHP_EOL;
-        }
+        return $result;
     }
 
-    public static function ShowPedidoProveedor($fileTxtPedido, $id){
-        $pedidos = Pedido::GetPedidosByIdFromTxt($id, $fileTxtPedido);
-        $format = sprintf("%-15s;%-8s;%-5s;" . PHP_EOL,
-            "Producto","Cantidad","Id");
-        echo $format;
-        foreach($pedidos as $pedido){
-            echo $pedido->ShowPedidoProps();
-        }
+    public static function ShowPedidosProveedor($fileTxtPedido, $proveedor)
+    {
+        $result = "El proveedor no tiene productos cargados".PHP_EOL;
+        $pedidos = Pedido::GetPedidosByIdProveedorFromTxt($proveedor->id, $fileTxtPedido);
+        if(!is_null($pedidos) && count($pedidos) > 0)
+        {
+            $result = Pedido::GetHeader();
+            foreach($pedidos as $pedido)
+            {
+                $result .= $pedido->ShowPedido($proveedor);
+            }
+        }        
+        return $result;
     }
 }
 ?>

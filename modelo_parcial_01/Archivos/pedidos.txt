@@ -1,5 +1,5 @@
-Id;Nombre;Email;Foto
-2;gaseosa;5;
-2;gaseosa;5;
-2;caramelos;10;
-1;cigarrillos;10;
+Id;Id Proveedor;Producto;Cantidad;
+1;1;turrones;250;
+2;1;galletitas;150;
+3;2;gaseosa;300;
+4;3;alfajor;1000;

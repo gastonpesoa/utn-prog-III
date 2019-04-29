@@ -1,26 +1,12 @@
 <?php
-class Archivo{
-
+class Archivo
+{
     public $path;
 
     public function __construct($path){        
         $this->path = $path;
-    }
-    
+    }    
     //====================== GETTERS
-    //JSON
-    public function JsonFileToArray()
-    {
-        $arrayStdClass = array();
-
-        if(file_exists($this->path))
-        {
-            $file = file_get_contents($this->path);
-            $arrayStdClass = json_decode($file);
-        }
-        return $arrayStdClass;
-    }
-    //TXT
     public function TextToArray()
     {
         $array = array();        
@@ -46,142 +32,61 @@ class Archivo{
         return $array;
     }
     //====================== SETS
-    //JSON
-    public function ArrayToJsonFile($array)
-    {           
-        return file_put_contents($this->path, json_encode($array));
-    }    
-    //TXT
     public function WriteInTxtFile($string)
     {
         return file_put_contents($this->path, $string);        
     }
-    //================================================================
-
-    //para imagenes o documentos
-    public function GetExtension($file)
+    //===================== SAVE FILES
+    public function GetNameAndExtension($fileName)
     {
-        $fileNameArray = explode('.', $file['foto']['name']);
-        return $extension = "." . $fileNameArray[count($fileNameArray)-1];
+        $fileNameArray = explode('/', $fileName);
+        return $fileNameArray[count($fileNameArray)-1];
+    }
+    
+    public function GetExtension($fileName)
+    {
+        $fileNameArray = explode('.', $fileName);
+        return "." . $fileNameArray[count($fileNameArray)-1];
+    }    
+
+    public function GetName($fileName)
+    {
+        $nameAndExtension = $this->GetNameAndExtension($fileName);
+        $nameAndExtensionArray = explode('.', $nameAndExtension);
+        return $nameAndExtensionArray[count($nameAndExtensionArray)-2];
     }
 
-    private function RenameFile($urlDestino, $nombreArchivo, $extension)
+    private function NameFile($nombreArchivo, $extension)
     {
-        return $urlDestino . $nombreArchivo . $extension;
+        return $this->path . $nombreArchivo . $extension;
     }
 
-    private function RenameExistingFile($urlBackup, $nombreArchivo, $extension)
+    private function RenameFile($urlBackup, $nombreArchivo, $extension)
     {
         $hoy = date("_d-m-Y");
         return $urlBackup . $nombreArchivo . $hoy . $extension;
     }
 
-    private function CreateBackup($urlBackup, $uploadfile, $nombreArchivo, $extension)
-    {
-        $returnAux = true;
-        $backup = $this->RenameExistingFile($urlBackup, $nombreArchivo, $extension);
-
-        if(!copy($uploadfile, $backup))
-            $returnAux = false;
-
-        return $returnAux;
-    }
-
-    public function InsertWatermark($urlimagen, $urlestampa, $extension)
-    {
-        // Cargar la estampa y la foto para aplicarle la marca de agua
-        $estampa = imagecreatefrompng($urlestampa);
-        if($extension == '.jpeg' || $extension == '.jpg')
-            $im = imagecreatefromjpeg($urlimagen);
-        if($extension == '.png')
-            $im = imagecreatefrompng($urlimagen);
-        // Establecer los márgenes para la estampa y obtener el alto/ancho de la imagen de la estampa
-        $margen_dcho = 10;
-        $margen_inf = 10;
-        $sx = imagesx($estampa);
-        $sy = imagesy($estampa);
-
-        // Copiar la imagen de la estampa sobre nuestra foto usando los índices de márgen y el
-        // ancho de la foto para calcular la posición de la estampa.
-        imagecopy($im, $estampa, imagesx($im) - $sx - $margen_dcho, imagesy($im) - $sy - $margen_inf, 0, 0, imagesx($estampa), imagesy($estampa));
-
-        // Imprimir y liberar memoria
-        if($extension == '.jpeg' || $extension == '.jpg')
-            imagejpeg($im, $urlimagen);
-        if($extension == '.png')
-            imagepng($im, $urlimagen);
-        
-        imagedestroy($im);
-    }
-
-    public function SaveFileDirectory($file, $nuevoNombre, $urlBackup, $urlEstampa)
-    {        
-        $extension = $this->GetExtension($file);
-        $uploadfile = $this->RenameFile($this->path, $nuevoNombre, $extension);
-        if(file_exists($uploadfile))
-            $this->CreateBackup($urlBackup, $uploadfile, $nuevoNombre, $extension);
+    public function SaveFileInFolder($file, $object)
+    {     
+        $result = null;   
+        $nombreArchivo = "{$object->id}_{$object->nombre}";
+        $extension = $this->GetExtension($file['foto']['name']);
+        $uploadfile = $this->NameFile($nombreArchivo, $extension);                
         if(move_uploaded_file($file['foto']['tmp_name'], $uploadfile))
-            $this->InsertWatermark($uploadfile, $urlEstampa, $extension);
-        return $uploadfile;
+            $result = $uploadfile;
+        return $result;
     }
-
-    public function SaveFileInBase64($file)
-    {
-        return base64_encode(file_get_contents($file));
-    }
-
-    // public function SaveFileDirectory($file, $urlDestino, $nuevoNombre, $urlBackup, $urlEstampa)
-    // {
-    //     //inicializo variables de retorno de informacion
-    //     $returnAux = "No se pudo guardar el archivo" . PHP_EOL;
-    //     $returnAuxBackup = "";
-
-    //     $extension = Archivo::GetExtension($file);
-
-    //     $uploadfile = $this->RenameFile($urlDestino, $nuevoNombre, $extension);
-
-    //     if(file_exists($uploadfile))
-    //     {
-    //         $returnAuxBackup = "Archivo existente. Se crea backup." . PHP_EOL;
-    //         if(!$this->CreateBackup($urlBackup, $uploadfile, $nuevoNombre, $extension))
-    //             $returnAuxBackup = "Archivo existente. No se pudo crear backup." . PHP_EOL;
-    //     }
-
-    //     if(move_uploaded_file($file['imagen']['tmp_name'], $uploadfile))
-    //         $this->InsertWatermark($uploadfile, $urlEstampa);
-    //         $returnAux = "Se guardo el archivo!" . PHP_EOL;
-
-    //     //return $returnAuxBackup . $returnAux;
-    //     return $uploadfile;
-    // }            
-
-    public function SaveText($path)
-    {
-        $returnAux = "Se escribió el dato en el archivo txt." . PHP_EOL;
-        file_exists($path) ? $file = fopen($path, "at") : $file = fopen($path, "wt");
-        $data = $this->ToString();
-        if(!fwrite($file,$data))
-            $returnAux = "No se pudo escribir el archivo txt.".PHP_EOL;
-
-        fclose($file);
-        return $returnAux;
-    }
-
-    //para json
-
-    public function SaveJsonLinea($path)
-    {
-        $returnAux = "Se escribió el dato en el archivo json." . PHP_EOL;
-
-        file_exists($path) ? $file = fopen($path, "at") : $file = fopen($path, "wt");
-
-        if(!fwrite($file, $this->ObjectToJson()))
-            $returnAux = "No se pudo escribir el archivo json.".PHP_EOL;
-
-        fclose($file);
-        return $returnAux;
-    }
-
     
+    public function UpdateFileInFolder($file, $fileFotos, $object)
+    {
+        $result = null;
+        $extension = $this->GetExtension($object->foto);
+        $nombreAnterior = $this->GetName($object->foto);
+        $nombreNuevo = $this->RenameFile($this->path, $nombreAnterior, $extension);
+        if(rename($object->foto, $nombreNuevo))
+            $result = $nombreNuevo;            
+        return $result;
+    }
 }
 ?>
