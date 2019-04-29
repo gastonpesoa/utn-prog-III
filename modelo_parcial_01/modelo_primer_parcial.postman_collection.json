@@ -1,0 +1,339 @@
+{
+	"info": {
+		"_postman_id": "2462abee-75cd-4c6d-82f9-93d188c7f5d3",
+		"name": "modelo_primer_parcial",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "cargarProveedor",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "caso",
+							"value": "cargarProveedor",
+							"type": "text"
+						},
+						{
+							"key": "nombre",
+							"value": "nueve",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "nueve@mail.com",
+							"type": "text"
+						},
+						{
+							"key": "foto",
+							"type": "file",
+							"src": ""
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:80/utn-prog-III/modelo_parcial_01/nexo.php",
+					"host": [
+						"localhost"
+					],
+					"port": "80",
+					"path": [
+						"utn-prog-III",
+						"modelo_parcial_01",
+						"nexo.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "consultarProveedor",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:80/utn-prog-III/modelo_parcial_01/nexo.php?caso=consultarProveedor&nombre=tres",
+					"host": [
+						"localhost"
+					],
+					"port": "80",
+					"path": [
+						"utn-prog-III",
+						"modelo_parcial_01",
+						"nexo.php"
+					],
+					"query": [
+						{
+							"key": "caso",
+							"value": "consultarProveedor"
+						},
+						{
+							"key": "nombre",
+							"value": "tres"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "proveedores",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:80/utn-prog-III/modelo_parcial_01/nexo.php?caso=proveedores",
+					"host": [
+						"localhost"
+					],
+					"port": "80",
+					"path": [
+						"utn-prog-III",
+						"modelo_parcial_01",
+						"nexo.php"
+					],
+					"query": [
+						{
+							"key": "caso",
+							"value": "proveedores"
+						},
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "hacerPedido",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "caso",
+							"value": "hacerPedido",
+							"type": "text"
+						},
+						{
+							"key": "producto",
+							"value": "alfajor",
+							"type": "text"
+						},
+						{
+							"key": "cantidad",
+							"value": "1000",
+							"type": "text"
+						},
+						{
+							"key": "idProveedor",
+							"value": "3",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:80/utn-prog-III/modelo_parcial_01/nexo.php",
+					"host": [
+						"localhost"
+					],
+					"port": "80",
+					"path": [
+						"utn-prog-III",
+						"modelo_parcial_01",
+						"nexo.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "listrarPedidos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:80/utn-prog-III/modelo_parcial_01/nexo.php?caso=listarPedidos",
+					"host": [
+						"localhost"
+					],
+					"port": "80",
+					"path": [
+						"utn-prog-III",
+						"modelo_parcial_01",
+						"nexo.php"
+					],
+					"query": [
+						{
+							"key": "caso",
+							"value": "listarPedidos"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "listarPedidoProveedor",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:80/utn-prog-III/modelo_parcial_01/nexo.php?caso=listarPedidoProveedor&idProveedor=1",
+					"host": [
+						"localhost"
+					],
+					"port": "80",
+					"path": [
+						"utn-prog-III",
+						"modelo_parcial_01",
+						"nexo.php"
+					],
+					"query": [
+						{
+							"key": "caso",
+							"value": "listarPedidoProveedor"
+						},
+						{
+							"key": "idProveedor",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "modificarProveedor",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "caso",
+							"value": "modificarProveedor",
+							"type": "text"
+						},
+						{
+							"key": "id",
+							"value": "7",
+							"type": "text"
+						},
+						{
+							"key": "nombre",
+							"value": "sieteModificado",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "sieteModificado@mail.com",
+							"type": "text"
+						},
+						{
+							"key": "foto",
+							"type": "file",
+							"src": ""
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:80/utn-prog-III/modelo_parcial_01/nexo.php?",
+					"host": [
+						"localhost"
+					],
+					"port": "80",
+					"path": [
+						"utn-prog-III",
+						"modelo_parcial_01",
+						"nexo.php"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						},
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						},
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						},
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "fotosBack",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:80/utn-prog-III/modelo_parcial_01/nexo.php?caso=fotosBack",
+					"host": [
+						"localhost"
+					],
+					"port": "80",
+					"path": [
+						"utn-prog-III",
+						"modelo_parcial_01",
+						"nexo.php"
+					],
+					"query": [
+						{
+							"key": "caso",
+							"value": "fotosBack"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
