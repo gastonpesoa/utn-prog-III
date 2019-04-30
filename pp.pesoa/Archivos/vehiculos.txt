@@ -1,0 +1,6 @@
+patente;marca;modelo;precio;
+123;audi;tres;22.2;
+aaa321;siam;ditella;22.2;
+bbb321;audi;dos;22.223;
+sad789;ford;falcon;22.223789;
+wer345;fiat;uno;4565;

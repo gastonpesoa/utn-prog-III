@@ -1,0 +1,16 @@
+fecha;patente;marca;modelo;precio;tipo;
+fecha;;;;;;
+fecha;;;;;;
+fecha;;;;;;
+fecha;;;;;;
+fecha;;;;;;
+fecha;;;;;;
+fecha;;;;;;
+lunes;123;audi;tres;123;20000;
+lunes;123;audi;tres;123;20000;
+lunes;123;audi;tres;123;20000;
+lunes;123;audi;tres;123;20000;
+lunes;123;audi;tres;123;20000;
+lunes;123;audi;tres;123;20000;
+lunes;123;audi;tres;123;20000;
+lunes;123;audi;tres;123;20000;

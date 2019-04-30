@@ -1,0 +1,4 @@
+Id;Nombre;Tipo;Precio;Demora;
+1;lavado;20000;123;25;
+2;secado;20000;123;25;
+3;secado;30000;123;25;

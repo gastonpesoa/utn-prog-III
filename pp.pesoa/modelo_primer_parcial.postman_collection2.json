@@ -1,0 +1,260 @@
+{
+	"id": "b34a9f67-ecee-fc59-fd41-6184db953ad0",
+	"name": "modelo_primer_parcial",
+	"description": "",
+	"order": [
+		"a0ae8026-c8a2-680f-87bb-2a862313a130",
+		"961e260b-4bff-255e-b85e-4a422af40151",
+		"d8f9c391-fd42-f451-68bc-716239746f8d",
+		"2f166ed3-6d2b-a989-bd18-b56c357e638b"
+	],
+	"folders": [],
+	"folders_order": [],
+	"timestamp": 1555971103900,
+	"owner": 0,
+	"public": false,
+	"requests": [
+		{
+			"id": "2f166ed3-6d2b-a989-bd18-b56c357e638b",
+			"headers": "",
+			"headerData": [],
+			"url": "localhost:8080/pp.pesoa/nexo.php?caso=sacarTurno&patente=123&fecha=lunes&tipo=20000",
+			"queryParams": [
+				{
+					"key": "caso",
+					"value": "sacarTurno",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "patente",
+					"value": "123",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "fecha",
+					"value": "lunes",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "tipo",
+					"value": "20000",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "",
+					"value": "",
+					"equals": true,
+					"description": "",
+					"enabled": false
+				},
+				{
+					"key": "",
+					"value": "",
+					"equals": true,
+					"description": "",
+					"enabled": false
+				},
+				{
+					"key": "",
+					"value": "",
+					"equals": true,
+					"description": "",
+					"enabled": false
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1556584635066,
+			"name": "sacarTurno",
+			"description": "",
+			"collectionId": "b34a9f67-ecee-fc59-fd41-6184db953ad0",
+			"responses": []
+		},
+		{
+			"id": "961e260b-4bff-255e-b85e-4a422af40151",
+			"headers": "",
+			"headerData": [],
+			"url": "localhost:8080/pp.pesoa/nexo.php?caso=consultarVehiculo&dato=uno",
+			"queryParams": [
+				{
+					"key": "caso",
+					"value": "consultarVehiculo",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "dato",
+					"value": "uno",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "",
+					"value": "",
+					"equals": true,
+					"description": "",
+					"enabled": false
+				},
+				{
+					"key": "",
+					"value": "",
+					"equals": true,
+					"description": "",
+					"enabled": false
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1556584487274,
+			"name": "consultarVehiculo",
+			"description": "",
+			"collectionId": "b34a9f67-ecee-fc59-fd41-6184db953ad0",
+			"responses": []
+		},
+		{
+			"id": "a0ae8026-c8a2-680f-87bb-2a862313a130",
+			"headers": "",
+			"headerData": [],
+			"url": "localhost:8080/pp.pesoa/nexo.php",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [
+				{
+					"key": "caso",
+					"value": "cargarVehiculo",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "marca",
+					"value": "audi",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "modelo",
+					"value": "tres",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "patente",
+					"value": "123",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "precio",
+					"value": "22.2",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1556578593775,
+			"name": "cargarVehiculo",
+			"description": "",
+			"collectionId": "b34a9f67-ecee-fc59-fd41-6184db953ad0",
+			"responses": []
+		},
+		{
+			"id": "d8f9c391-fd42-f451-68bc-716239746f8d",
+			"headers": "",
+			"headerData": [],
+			"url": "localhost:8080/pp.pesoa/nexo.php",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [
+				{
+					"key": "caso",
+					"value": "cargarTipoServicio",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "id",
+					"value": "3",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "nombre",
+					"value": "secado",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "tipo",
+					"value": "30000",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "precio",
+					"value": "123",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "demora",
+					"value": "25",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1556584636393,
+			"name": "cargarTipoServicio",
+			"description": "",
+			"collectionId": "b34a9f67-ecee-fc59-fd41-6184db953ad0",
+			"responses": []
+		}
+	]
+}

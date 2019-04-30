@@ -1,0 +1,362 @@
+{
+	"id": "6008c41f-ddf9-b270-b5d7-b7c33ea72683",
+	"name": "modelo_primer_parcial",
+	"description": "",
+	"order": [
+		"c0422cf6-88c8-2b6b-9751-3e71da5a1d79",
+		"5d36ff60-921c-e88b-ead5-f6832b697606",
+		"bec487c4-e35f-d864-d6a7-db4cb9a75772",
+		"b890a6fa-e3e2-6bc2-82fb-54df0bb7bc73",
+		"2c60fceb-8659-af06-cab5-689b9472705d",
+		"69b97fda-3bca-65a3-4d46-c8b9a4f368a8",
+		"6ef0c9b0-4ab7-2f34-73e1-ee968f7ddfe2"
+	],
+	"folders": [],
+	"folders_order": [],
+	"timestamp": 1555971103900,
+	"owner": 0,
+	"public": false,
+	"requests": [
+		{
+			"id": "2c60fceb-8659-af06-cab5-689b9472705d",
+			"headers": "",
+			"headerData": [],
+			"url": "localhost:8080/modelo_parcial_01/nexo.php?caso=listarServicios",
+			"queryParams": [
+				{
+					"key": "caso",
+					"value": "listarServicios",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "6008c41f-ddf9-b270-b5d7-b7c33ea72683",
+			"data": null,
+			"dataMode": "params",
+			"name": "listrarServicios",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1555977962321,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		},
+		{
+			"id": "5d36ff60-921c-e88b-ead5-f6832b697606",
+			"headers": "",
+			"headerData": [],
+			"url": "localhost:8080/modelo_parcial_01/nexo.php?caso=consultarVehiculo&nombre=dos",
+			"queryParams": [
+				{
+					"key": "caso",
+					"value": "consultarVehiculo",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "nombre",
+					"value": "dos",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1555979134770,
+			"name": "consultarVehiculo",
+			"description": "",
+			"collectionId": "6008c41f-ddf9-b270-b5d7-b7c33ea72683",
+			"responses": []
+		},
+		{
+			"id": "69b97fda-3bca-65a3-4d46-c8b9a4f368a8",
+			"headers": "",
+			"headerData": [],
+			"url": "localhost:8080/modelo_parcial_01/nexo.php?caso=listarServicioVehiculo&id=1",
+			"queryParams": [
+				{
+					"key": "caso",
+					"value": "listarServicioVehiculo",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "id",
+					"value": "1",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1555979983152,
+			"name": "listarServicioVehiculo",
+			"description": "",
+			"collectionId": "6008c41f-ddf9-b270-b5d7-b7c33ea72683",
+			"responses": []
+		},
+		{
+			"id": "6ef0c9b0-4ab7-2f34-73e1-ee968f7ddfe2",
+			"headers": "",
+			"headerData": [],
+			"url": "localhost:8080/modelo_parcial_01/nexo.php",
+			"queryParams": [
+				{
+					"key": "",
+					"value": "",
+					"equals": true,
+					"description": "",
+					"enabled": false
+				},
+				{
+					"key": "",
+					"value": "",
+					"equals": false,
+					"description": "",
+					"enabled": false
+				},
+				{
+					"key": "",
+					"value": "",
+					"equals": false,
+					"description": "",
+					"enabled": false
+				},
+				{
+					"key": "",
+					"value": "",
+					"equals": false,
+					"description": "",
+					"enabled": false
+				},
+				{
+					"key": "",
+					"value": "",
+					"equals": false,
+					"description": "",
+					"enabled": false
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [
+				{
+					"key": "caso",
+					"value": "modificarVehiculo",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "id",
+					"value": "1",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "nombre",
+					"value": "unoModificado",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "email",
+					"value": "unoModificado@mail.com",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "foto",
+					"value": "Hydrangeas.jpg",
+					"description": "",
+					"type": "file",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1555981854717,
+			"name": "modificarVehiculo",
+			"description": "",
+			"collectionId": "6008c41f-ddf9-b270-b5d7-b7c33ea72683",
+			"responses": []
+		},
+		{
+			"id": "b890a6fa-e3e2-6bc2-82fb-54df0bb7bc73",
+			"headers": "",
+			"headerData": [],
+			"url": "localhost:8080/modelo_parcial_01/nexo.php",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [
+				{
+					"key": "caso",
+					"value": "hacerServicio",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "tipo",
+					"value": "cigarrillos",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "demora",
+					"value": "10",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "id",
+					"value": "11",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1555979992694,
+			"name": "hacerServicio",
+			"description": "",
+			"collectionId": "6008c41f-ddf9-b270-b5d7-b7c33ea72683",
+			"responses": []
+		},
+		{
+			"id": "bec487c4-e35f-d864-d6a7-db4cb9a75772",
+			"headers": "",
+			"headerData": [],
+			"url": "localhost:8080/modelo_parcial_01/nexo.php?caso=vehiculos",
+			"queryParams": [
+				{
+					"key": "caso",
+					"value": "vehiculos",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "",
+					"value": "",
+					"equals": true,
+					"description": "",
+					"enabled": false
+				}
+			],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "6008c41f-ddf9-b270-b5d7-b7c33ea72683",
+			"data": null,
+			"dataMode": "params",
+			"name": "vehiculos",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1555971967076,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		},
+		{
+			"id": "c0422cf6-88c8-2b6b-9751-3e71da5a1d79",
+			"headers": "",
+			"headerData": [],
+			"url": "localhost:8080/modelo_parcial_01/nexo.php",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [
+				{
+					"key": "caso",
+					"value": "cargarVehiculo",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "id",
+					"value": "3",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "nombre",
+					"value": "tres",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "email",
+					"value": "tres@mail.com",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "foto",
+					"value": "Desert.jpg",
+					"description": "",
+					"type": "file",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1555979131633,
+			"name": "cargarVehiculo",
+			"description": "",
+			"collectionId": "6008c41f-ddf9-b270-b5d7-b7c33ea72683",
+			"responses": []
+		}
+	]
+}
