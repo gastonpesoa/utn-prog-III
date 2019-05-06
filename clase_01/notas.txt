@@ -184,3 +184,5 @@ VALUES (100,"Perez","Peron 876","Quilmes"),
 ALTER TABLE tablename AUTO_INCREMENT = 1
 
 ======================================================
+slim
+
