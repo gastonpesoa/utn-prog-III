@@ -3,3 +3,4 @@ Id;Id Proveedor;Producto;Cantidad;
 2;1;galletitas;150;
 3;2;gaseosa;300;
 4;3;alfajor;1000;
+5;3;alfajor;1000;
