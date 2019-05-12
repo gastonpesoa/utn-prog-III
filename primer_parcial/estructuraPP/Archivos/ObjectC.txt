@@ -1,0 +1,7 @@
+propA;propB;propC;propD;
+abc123;15;ford;fiesta;2300;20000;
+abc123;1;ford;fiesta;5000;10000;
+abc234;30;fiat;uno;6300;50000;
+abc567;25;renault;19;6300;50000;
+abc567;25;renault;19;6300;50000;
+abc567;25;renault;19;6300;50000;

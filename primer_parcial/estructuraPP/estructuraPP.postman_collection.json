@@ -1,0 +1,371 @@
+{
+	"info": {
+		"_postman_id": "82d509b2-b0ee-4500-b468-7b856b6828c6",
+		"name": "estructuraPP",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "cargarObjectA",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "caso",
+							"value": "cargarObjectA",
+							"type": "text"
+						},
+						{
+							"key": "propA",
+							"value": "sdf3454",
+							"type": "text"
+						},
+						{
+							"key": "propB",
+							"value": "fiat",
+							"type": "text"
+						},
+						{
+							"key": "propC",
+							"value": "punto",
+							"type": "text"
+						},
+						{
+							"key": "propD",
+							"value": "345678",
+							"type": "text"
+						},
+						{
+							"key": "foto",
+							"type": "file",
+							"src": ""
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:80/utn-prog-III/primer_parcial/estructuraPP/nexo.php",
+					"host": [
+						"localhost"
+					],
+					"port": "80",
+					"path": [
+						"utn-prog-III",
+						"primer_parcial",
+						"estructuraPP",
+						"nexo.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "consultarObjectA",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "localhost:80/utn-prog-III/primer_parcial/estructuraPP/nexo.php?caso=consultarObjectA&dato=UNO",
+					"host": [
+						"localhost"
+					],
+					"port": "80",
+					"path": [
+						"utn-prog-III",
+						"primer_parcial",
+						"estructuraPP",
+						"nexo.php"
+					],
+					"query": [
+						{
+							"key": "caso",
+							"value": "consultarObjectA"
+						},
+						{
+							"key": "dato",
+							"value": "UNO"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "cargarObjectB",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "caso",
+							"value": "cargarObjectB",
+							"type": "text"
+						},
+						{
+							"key": "propA",
+							"value": "3",
+							"type": "text"
+						},
+						{
+							"key": "propB",
+							"value": "50000",
+							"type": "text"
+						},
+						{
+							"key": "propC",
+							"value": "6300",
+							"type": "text"
+						},
+						{
+							"key": "propD",
+							"value": "6",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:80/utn-prog-III/primer_parcial/estructuraPP/nexo.php",
+					"host": [
+						"localhost"
+					],
+					"port": "80",
+					"path": [
+						"utn-prog-III",
+						"primer_parcial",
+						"estructuraPP",
+						"nexo.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "cargarObjectC",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:80/utn-prog-III/primer_parcial/estructuraPP/nexo.php?caso=cargarObjectC&propA=abc567&propB=25",
+					"host": [
+						"localhost"
+					],
+					"port": "80",
+					"path": [
+						"utn-prog-III",
+						"primer_parcial",
+						"estructuraPP",
+						"nexo.php"
+					],
+					"query": [
+						{
+							"key": "caso",
+							"value": "cargarObjectC"
+						},
+						{
+							"key": "propA",
+							"value": "abc567"
+						},
+						{
+							"key": "propB",
+							"value": "25"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "obectCs",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:80/utn-prog-III/primer_parcial/estructuraPP/nexo.php?caso=obectCs",
+					"host": [
+						"localhost"
+					],
+					"port": "80",
+					"path": [
+						"utn-prog-III",
+						"primer_parcial",
+						"estructuraPP",
+						"nexo.php"
+					],
+					"query": [
+						{
+							"key": "caso",
+							"value": "obectCs"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "consultarObjectCs",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:80/utn-prog-III/primer_parcial/estructuraPP/nexo.php?caso=consultarObjectCs&dato=50000",
+					"host": [
+						"localhost"
+					],
+					"port": "80",
+					"path": [
+						"utn-prog-III",
+						"primer_parcial",
+						"estructuraPP",
+						"nexo.php"
+					],
+					"query": [
+						{
+							"key": "caso",
+							"value": "consultarObjectCs"
+						},
+						{
+							"key": "dato",
+							"value": "50000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "modificarObjectA",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "caso",
+							"value": "modificarObjectA",
+							"type": "text"
+						},
+						{
+							"key": "propA",
+							"value": "abc257",
+							"type": "text"
+						},
+						{
+							"key": "propB",
+							"value": "toyota",
+							"type": "text"
+						},
+						{
+							"key": "propC",
+							"value": "corolla",
+							"type": "text"
+						},
+						{
+							"key": "propD",
+							"value": "450000",
+							"type": "text"
+						},
+						{
+							"key": "foto",
+							"type": "file",
+							"src": ""
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:80/utn-prog-III/primer_parcial/estructuraPP/nexo.php",
+					"host": [
+						"localhost"
+					],
+					"port": "80",
+					"path": [
+						"utn-prog-III",
+						"primer_parcial",
+						"estructuraPP",
+						"nexo.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "obectAs",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:80/utn-prog-III/primer_parcial/estructuraPP/nexo.php?caso=obectAs",
+					"host": [
+						"localhost"
+					],
+					"port": "80",
+					"path": [
+						"utn-prog-III",
+						"primer_parcial",
+						"estructuraPP",
+						"nexo.php"
+					],
+					"query": [
+						{
+							"key": "caso",
+							"value": "obectAs"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,12 @@
+propA;propB;propC;propD;propE;
+abc5678;peugot;206;600000;./Fotos/abc5678.jpeg;
+abc567;renault;19;380000;;
+abc123;ford;fiesta;680000;;
+abc234;fiat;uno;150000;;
+abc2345;fiatt;uno;150000;;
+abc25;honda;sivic;1500000;;
+abc257;toyota;corolla;450000;./Fotos/abc257.jpeg;
+abc2579;toyota;corola;2000000;;
+abc25709;toyota;corola;2000000;;
+sdf345;fiat;punto;345678;;
+sdf3454;fiat;punto;345678;./Fotos/sdf3454.jpeg;

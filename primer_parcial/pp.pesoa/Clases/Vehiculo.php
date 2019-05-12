@@ -219,8 +219,7 @@ class Vehiculo
         {
             $result = Vehiculo::GetHeader();
             foreach($array as $vehiculo)
-            {
-                
+            {                
                 $result .= $vehiculo->ShowVehiculo();
             }
         }
