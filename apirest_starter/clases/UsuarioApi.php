@@ -12,7 +12,7 @@ class UsuarioApi extends Usuario implements IApiUsable
     }
      public function TraerTodos($request, $response, $args) {
       	$todosLosUsuarios=Usuario::TraerTodoLosUsuarios();
-     	$newResponse = $response->withJson($todosLosUsuarios, 200);  
+     	//$newResponse = $response->withJson($todosLosUsuarios, 200);  
     	return $newResponse;
     }
       public function CargarUno($request, $response, $args) {
@@ -28,8 +28,8 @@ class UsuarioApi extends Usuario implements IApiUsable
 
         // $archivos = $request->getUploadedFiles();
         // $destino="./fotos/";
-        //var_dump($archivos);
-        //var_dump($archivos['foto']);
+        // var_dump($archivos);
+        // var_dump($archivos['foto']);
 
         // $nombreAnterior=$archivos['foto']->getClientFilename();
         // $extension= explode(".", $nombreAnterior)  ;

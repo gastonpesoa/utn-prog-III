@@ -20,9 +20,18 @@ class Usuario
     	return $newResponse;
     }
       public function CargarUno($request, $response, $args) {
+		//   if(isset($_FILES['foto'])){
+		// 	  Usuario::cargarFoto($_FILES['foto']);
+		//   }
+		var_dump($request);
      	$response->getBody()->write("<h1>Cargar uno nuevo</h1>");
       	return $response;
-    }
+	}
+
+	public static function cararFoto($foto){
+
+	}
+
       public function BorrarUno($request, $response, $args) {
      	$ArrayDeParametros = $request->getParsedBody();
      	$id=$ArrayDeParametros['id'];

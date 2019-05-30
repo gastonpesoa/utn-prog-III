@@ -186,3 +186,20 @@ ALTER TABLE tablename AUTO_INCREMENT = 1
 ======================================================
 slim
 
+
+))))))))
+
+capa datos => cd //
+capa negocio => cdApi
+
+en index definicion de rutas
+
+====================================
+fpdf
+json webtoken
+login devuelve json webtoken
+middleware para login no le pide jwt
+
+mw verifico tanto salida para entrada usando el jwt
+biblioteca firebase jwt
+
