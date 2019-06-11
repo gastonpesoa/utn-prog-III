@@ -1,0 +1,201 @@
+{
+	"id": "8d22478c-7128-0620-a7d6-56f9f8eb435a",
+	"name": "segundoParcial",
+	"description": "",
+	"order": [
+		"6e6ff380-27ec-f2a5-3278-1a80cc0ea624",
+		"3b15ffeb-2e55-ea27-55b5-740828742d29",
+		"1ecdd9e6-332d-2004-62b0-22cea97621b7"
+	],
+	"folders": [],
+	"folders_order": [],
+	"timestamp": 1560207217860,
+	"owner": 0,
+	"public": false,
+	"requests": [
+		{
+			"id": "1ecdd9e6-332d-2004-62b0-22cea97621b7",
+			"headers": "Content-Type: application/x-www-form-urlencoded\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/x-www-form-urlencoded",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "localhost:80/modeloSegundoParcial/public/usuario/?perfil=asdasd",
+			"queryParams": [
+				{
+					"key": "perfil",
+					"value": "asdasd",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [
+				{
+					"key": "nombre",
+					"value": "admin",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "clave",
+					"value": "admin",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "sexo",
+					"value": "femenino",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "perfil",
+					"value": "admin",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1560209377545,
+			"name": "localhost:80/modeloSegundoParcial/public/usuario/ copy copy",
+			"description": "",
+			"collectionId": "8d22478c-7128-0620-a7d6-56f9f8eb435a",
+			"responses": []
+		},
+		{
+			"id": "3b15ffeb-2e55-ea27-55b5-740828742d29",
+			"headers": "Content-Type: application/x-www-form-urlencoded\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/x-www-form-urlencoded",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "localhost:80/modeloSegundoParcial/public/usuario/",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "8d22478c-7128-0620-a7d6-56f9f8eb435a",
+			"data": [
+				{
+					"key": "nombre",
+					"value": "admin",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "clave",
+					"value": "admin",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "sexo",
+					"value": "femenino",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "perfil",
+					"value": "admin",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"name": "localhost:80/modeloSegundoParcial/public/usuario/ copy",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1560207220226,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		},
+		{
+			"id": "6e6ff380-27ec-f2a5-3278-1a80cc0ea624",
+			"headers": "Content-Type: application/x-www-form-urlencoded\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/x-www-form-urlencoded",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "localhost:80/modeloSegundoParcial/public/usuario/",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "8d22478c-7128-0620-a7d6-56f9f8eb435a",
+			"data": [
+				{
+					"key": "nombre",
+					"value": "admin",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "clave",
+					"value": "admin",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "sexo",
+					"value": "femenino",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "perfil",
+					"value": "admin",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"name": "localhost:80/modeloSegundoParcial/public/usuario/",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1560207220226,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		}
+	]
+}

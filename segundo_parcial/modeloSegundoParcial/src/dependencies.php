@@ -19,4 +19,19 @@ return function (App $app) {
         $logger->pushHandler(new \Monolog\Handler\StreamHandler($settings['path'], $settings['level']));
         return $logger;
     };
+
+    // ORM
+    $capsule = new \Illuminate\Database\Capsule\Manager;
+    $capsule->addConnection($container->get('settings')['db']);
+    $capsule->setAsGlobal();
+    $capsule->bootEloquent();
+    //pass the connection to global container
+    $container['db'] = function ($container) use ($capsule){
+        return $capsule;
+    };
+    
+    // Registration Controller
+    $container['UsuarioApi'] = function($c) {
+        return new UsuarioApi($c->get('logger'));
+    };
 };
