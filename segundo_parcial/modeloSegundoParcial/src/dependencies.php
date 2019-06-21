@@ -1,6 +1,9 @@
 <?php
 
 use Slim\App;
+use Clases\UsuarioApi;
+use Clases\CompraApi;
+use Clases\VerificaPerfilMW;
 
 return function (App $app) {
     $container = $app->getContainer();
@@ -33,5 +36,14 @@ return function (App $app) {
     // Registration Controller
     $container['UsuarioApi'] = function($c) {
         return new UsuarioApi($c->get('logger'));
+    };
+
+    $container['CompraApi'] = function($c) {
+        return new CompraApi($c->get('logger'));
+    };
+
+    // Registration MW
+    $container['VerificaPerfilMW'] = function() {
+        return new VerificaPerfilMW();
     };
 };

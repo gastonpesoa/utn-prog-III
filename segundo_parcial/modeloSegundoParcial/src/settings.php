@@ -20,7 +20,7 @@ return [
         'db' => [
             'driver' => 'mysql',
             'host' => 'localhost',
-            'database' => 'segundoparcial',
+            'database' => 'utn_prog_III',
             'username' => 'root',
             'password' => '',
             'charset'   => 'utf8',

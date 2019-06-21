@@ -1,36 +1,33 @@
 <?php
+namespace Clases;
+
+use \stdClass;
+use \Exception;
 
 class VerificaPerfilMW
 {
-    public function VerificarPerfil( $request,  $response, $next){
-    
-        $obj = new stdclass();
-        $obj->respuesta = "";
+    public function __construct() { }
 
-        $params = $request->getQueryParams(''); 
-                
-        try{
+    public function VerificarPerfil($request, $response, $next){
+    
+        $status = 401;
+        $params = $request->getParsedBody();        
+        try
+        {
             Token::VerifyToken($params['token']);
-            $obj->esValido=true;
+            $data = Token::GetData($params['token']);
+            $user = UsuarioApi::GetUserByName($data->nombre);            
+            if(strcasecmp($user->perfil, "admin") == 0){
+                return $next($request, $response);                                
+            } else {
+                $respuesta = array("Estado" => "Ok", "Mensaje" => "hola.");
+            }
         }
         catch(Exception $ex) {
-            $obj->exception = $ex->getMessage();
-            $obj->esValido=false;            
+            // var_dump($ex);
+            // die();
+            $respuesta = array("Estado" => "ERROR", "Mensaje" => "Token invalido.", "Excepcion" => $ex->getMessage());            
         }
-        if($obj->esValido){        
-            if(strcasecmp($params['perfil'], "admin") == 0){
-                $response = $next($request, $response);
-            } else {
-                $obj->respuesta = "hola";
-            } 
-        }else{
-            $obj->respuesta = "Token invalido";
-        }
-        
-        if($obj->respuesta!=""){
-            $nueva = $response->withJson($obj, 401);
-            return $nueva;
-        }
-        return $response;           
+        return $response->withJson($respuesta, $status);             
     }
 }

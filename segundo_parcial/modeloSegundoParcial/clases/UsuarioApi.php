@@ -1,64 +1,152 @@
 <?php
 
+namespace Clases;
+use App\Models\Usuario;
+
 class UsuarioApi
 { 
     protected $logger;
     
-    public function __construct(\Monolog\Logger $logger) {
+    public function __construct(\Monolog\Logger $logger) 
+    {
         $this->logger = $logger;
     }
 
-    public function LoginUser($request, $response, $args)
+    public function Welcome($request, $response, $args)
     {
-        $params = $request->getParsedBody();
-        $nombre = $params["nombre"];
-        $clave = $params["clave"];
-        $sexo = $params["sexo"];
+        $result = $response->withStatus(200)->getBody()->write("Hola Mundo!!");
+    }
 
-        $userORM = new \App\Models\Usuario();        
-        $respuesta = $userORM->where('nombre', "=", $nombre)->first();      
-        
-        if($respuesta){
-            if (password_verify(trim($clave), $respuesta->clave)) 
+    public static function GetUserById($userId)
+    {        
+        $userORM = new Usuario();    
+        return $userORM->find($userId);        
+    }
+
+    public static function GetIdUserByName($name)
+    {                
+        $userORM = new Usuario();    
+        $user = $userORM->where('nombre', "=", $name)->first();            
+        return $user->id;
+    }  
+
+    public static function GetUserByName($nombre)
+    {
+        $userORM = new Usuario();       
+        return $userORM->where('nombre', "=", $nombre)->first();                
+    }
+
+    public function VerifyPerfil($tipo)
+    {
+        $result = "user";
+        if(isset($tipo))
+        {
+            if(strcasecmp($tipo, "user")==0 || strcasecmp($tipo, "admin")==0)
             {
-                if(strcasecmp($respuesta["sexo"],$sexo)==0){
-                    if ($respuesta["perfil"] != "") 
-                    {
-                        $token = Token::CreateToken($respuestaPass);
-                        $this->logger->addInfo('User login'.$respuestaPass);             
-                        $respuesta = array("Estado" => "OK", "Mensaje" => "Logueado exitosamente.", "Token" => $token, "Nombre_Empleado" => $retorno["nombre_empleado"]);            
-                    } else {
-                        $respuesta = array("Estado" => "ERROR", "Mensaje" => "Perfil invalido.");
+                $result = $tipo;                            
+            }
+        }                        
+        return $result;
+    }
+
+    public function VerifySexo($sexo)
+    {
+        $result = "";
+        if(isset($sexo))
+        {
+            if(strcasecmp($sexo, "femenino")==0 || strcasecmp($sexo, "masculino")==0)
+            {
+                $result = $sexo;                 
+            }
+        }                        
+        return $result;
+    }   
+
+    public function RegisterUser($request, $response)
+    {        
+        $this->logger->addInfo('New user'); 
+        $data = $request->getParsedBody();
+        $status = 400;
+        $respuesta = array("Estado" => "ERROR", "Mensaje" => "Son requeridos nombre, clave y sexo del usuario.");                            
+        if(isset($data['nombre']) && isset($data['clave']) && isset($data['sexo']))
+        {            
+            $nombre = filter_var(trim($data['nombre']), FILTER_SANITIZE_STRING);
+            $pass = filter_var(trim($data['clave']), FILTER_SANITIZE_STRING);     
+            $sexoFilter = filter_var(trim($data['sexo']), FILTER_SANITIZE_STRING);     
+            $sexo = $this->VerifySexo($sexoFilter);
+            $tipo = filter_var(trim($data['perfil']), FILTER_SANITIZE_STRING);               
+            $respuesta = array("Estado" => "ERROR", "Mensaje" => "Sexo debe ser 'femenino' o 'masculino'.");                            
+            if($sexo != "")
+            {
+                $respuesta = array("Estado" => "ERROR", "Mensaje" => "Nombre o clave inocrrectos.");
+                if($nombre && $pass)
+                {
+                    $respuesta = array("Estado" => "ERROR", "Mensaje" => "Ya existe usuario registrado con nombre ".$nombre);                            
+                    if(UsuarioApi::GetUserByName($nombre) == null)
+                    {                    
+                        $user = new Usuario();                            
+                        $user->nombre = $nombre;
+                        $user->clave = password_hash($pass, PASSWORD_DEFAULT);
+                        $user->sexo = $sexo;
+                        $user->perfil = $this->VerifyPerfil($tipo);
+                        $user->save();
+                        $respuesta = array("Estado" => "OK", "Mensaje" => "Usuario, ".$nombre." registrado correctamente.");
+                        $status = 200;
                     }
-                }else{
-
-                    $respuesta = array("Estado" => "ERROR", "Mensaje" => "Sexo invalido.");
                 }
-            } else {
-                $respuesta = array("Estado" => "ERROR", "Mensaje" => "Clave invalida.");
-            }            
-        }else{
-            $respuesta = array("Estado" => "ERROR", "Mensaje" => "Usuario invalido.");
-        }
-        
+            }                   
+        }        
+        return $response->withJson($respuesta, $status);        
+    }    
 
-        $newResponse = $response->withJson($respuesta, 200);
-        return $newResponse;
+    public function LoginUser($request, $response, $args)
+    {        
+        $data = $request->getParsedBody();
+        $status = 400;
+        $respuesta = array("Estado" => "ERROR", "Mensaje" => "Son requeridos nombre, clave y sexo del usuario.");                            
+        if(isset($data['nombre']) && isset($data['clave']) && isset($data['sexo']))
+        {            
+            $nombre = filter_var(trim($data['nombre']), FILTER_SANITIZE_STRING);
+            $pass = filter_var(trim($data['clave']), FILTER_SANITIZE_STRING);     
+            $sexoFilter = filter_var(trim($data['sexo']), FILTER_SANITIZE_STRING);     
+            $sexo = $this->VerifySexo($sexoFilter);               
+            $respuesta = array("Estado" => "ERROR", "Mensaje" => "Sexo debe ser 'femenino' o 'masculino'.");    
+            if($sexo != "")
+            {
+                $respuesta = array("Estado" => "ERROR", "Mensaje" => "Nombre o clave inocrrectos.");
+                if($nombre && $pass)
+                {
+                    $respuesta = array("Estado" => "ERROR", "Mensaje" => "No existe usuario registrado con nombre ".$nombre);
+                    $usuario = UsuarioApi::GetUserByName($nombre);
+                    if($usuario)
+                    {  
+                        $respuesta = array("Estado" => "ERROR", "Mensaje" => "Clave incorrecta.");
+                        if (password_verify(trim($pass), $usuario->clave)) 
+                        {
+                            $respuesta = array("Estado" => "ERROR", "Mensaje" => "Sexo incorrecto.");
+                            if(strcasecmp($usuario->sexo, $sexo) == 0)
+                            {
+                                $token = Token::CreateToken($data);
+                                $this->logger->addInfo('User login'.$data);             
+                                $respuesta = array("Estado" => "OK", "Mensaje" => "Logueado exitosamente.", "Token" => $token, "Nombre" => $nombre);                               
+                                $status = 200;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return $response->withJson($respuesta, $status); 
     }
 
     public function GetAll($request, $response, $args)
-    {     
+    {    
         $this->logger->addInfo('User list'); 
-        $userORM = new \App\Models\Usuario();        
-        $params = $request->getQueryParams();   
-        $badRequest = true;     
+        $userORM = new Usuario();        
+        $params = $request->getParsedBody();   
 
         if (!isset($params['sort']) && !isset($params['order']))
-        {
-            $users = $userORM::all();        
-            $result = $response->withStatus(200)->getBody()->write($users->toJson());  
-            $badRequest = false;  
-        } 
+            $users = UsuarioApi::ShowUsuariosArray($userORM::all());
         else 
         {
             if (isset($params['sort']) && isset($params['order']))
@@ -66,68 +154,40 @@ class UsuarioApi
                 if (strcasecmp($params['sort'],'nombre') == 0)
                 {
                     if (strcasecmp($params['order'],'desc') == 0)
-                    {
-                        $users = $userORM::orderBy('nombre', 'desc')->get();
-                        $result = $response->withStatus(200)->getBody()->write($users->toJson());  
-                        $badRequest = false;  
-                    } 
+                        $users = UsuarioApi::ShowUsuariosArray($userORM::orderBy('nombre', 'desc')->get());
                     else 
-                    {
                         if (strcasecmp($params['order'],'asc') == 0)
-                        {
-                            $users = $userORM::orderBy('nombre', 'asc')->get();
-                            $result = $response->withStatus(200)->getBody()->write($users->toJson());    
-                            $badRequest = false;
-                        }                     
-                    }
+                            $users = UsuarioApi::ShowUsuariosArray($userORM::orderBy('nombre', 'asc')->get());                    
                 }
             }    
         }  
-
-        if($badRequest)
-            $result = $response->withStatus(400)->getBody()->write('Bad Request');
-
-        return $result;
+        return $response->withJson($users, 200);
     }
 
     public function GetById($request, $response, $args)
     {
         $this->logger->addInfo('User by id'); 
         $userId = (int)$args['id'];
-        $userORM = new \App\Models\Usuario();    
+        $userORM = new Usuario();    
         $user = $userORM->find($userId);
         return $response->withStatus(200)->getBody()->write($user->toJson());    
-    }
-
-    public function RegisterUser($request, $response)
-    {
-        $this->logger->addInfo('New user'); 
-        $data = $request->getParsedBody();
-        $badRequest = true;   
-
-        if(isset($data['nombre']) && isset($data['clave']) && isset($data['sexo']) && isset($data['perfil']))
+    }   
+    
+    public static function ShowUsuariosArray($array)
+    {  
+        $result = array();     
+        if(!is_null($array) && count($array) > 0)
         {
-            $nombre = filter_var(trim($data['nombre']), FILTER_SANITIZE_STRING);
-            $pass = filter_var(trim($data['clave']), FILTER_SANITIZE_STRING);     
-            $sexo = filter_var(trim($data['sexo']), FILTER_SANITIZE_STRING);     
-            $tipo = filter_var(trim($data['perfil']), FILTER_SANITIZE_STRING);     
-            
-            if($nombre && $pass && $tipo && $sexo)
-            {
-                $user = new \App\Models\Usuario();        
-                $user->nombre = $nombre;
-                $user->clave = password_hash($pass, PASSWORD_DEFAULT);
-                $user->sexo = $sexo;
-                $user->perfil = $tipo;
-                $user->save();
-                $result = $response->withStatus(200)->getBody()->write($user->toJson());   
-                $badRequest = false; 
-            }               
+            foreach($array as $user)
+            {  
+                $element = array(
+                    "nombre:" => $user->nombre,
+                    "sexo:" => $user->sexo,
+                    "perfil:" => $user->perfil
+                );  
+                array_push($result, $element);                            
+            }
         }
-
-        if($badRequest)
-            $result = $response->withStatus(400)->getBody()->write('Bad Request');
-
         return $result;
     }
 }

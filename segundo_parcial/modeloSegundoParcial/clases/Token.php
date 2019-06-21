@@ -1,6 +1,8 @@
 <?php
 
+namespace Clases;
 use Firebase\JWT\JWT;
+use \Exception;
 
 class Token
 {
@@ -16,27 +18,27 @@ class Token
             'exp' => $ahora + (60*60),
             'aud' => self::Aud(),
             'data' => $datos,
-            'app'=> "API REST La Comanda 2019"
+            'app'=> "API REST PROG III SP"
         );
      
         return JWT::encode($payload, self::$claveSecreta);
     }
     
     public static function VerifyToken($token)
-    {  
+    {                  
         if(empty($token)|| $token=="")
-        {
+        {            
             throw new Exception("El token esta vacio.");
         } 
         // las siguientes lineas lanzan una excepcion, de no ser correcto o de haberse terminado el tiempo       
-        try {
+        try {            
             $decodificado = JWT::decode(
                 $token,
                 self::$claveSecreta,
                 self::$tipoEncriptacion
             );
         } catch (ExpiredException $e) {
-            //var_dump($e);
+            //var_dump($e);            
            throw new Exception("Clave fuera de tiempo");
         }
         
