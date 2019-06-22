@@ -16,3 +16,12 @@ CREATE TABLE `utn_prog_III`.`Compra` (
   `fecha` DATETIME(6) NOT NULL , 
   `precio` DOUBLE(11,2) NOT NULL , 
   PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
+DROP TABLE IF EXISTS `Log`;
+CREATE TABLE `utn_prog_III`.`Log` ( 
+  `id` INT(11) NOT NULL AUTO_INCREMENT , 
+  `usuario` VARCHAR(250) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL , 
+  `metodo` VARCHAR(250) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL , 
+  `ruta` VARCHAR(250) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL , 
+  `hora` TIME(6) NOT NULL , 
+  PRIMARY KEY (`id`)) ENGINE = InnoDB;

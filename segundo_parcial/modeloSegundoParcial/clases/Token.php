@@ -25,7 +25,7 @@ class Token
     }
     
     public static function VerifyToken($token)
-    {                  
+    {                          
         if(empty($token)|| $token=="")
         {            
             throw new Exception("El token esta vacio.");
@@ -38,7 +38,7 @@ class Token
                 self::$tipoEncriptacion
             );
         } catch (ExpiredException $e) {
-            //var_dump($e);            
+            var_dump($e);            
            throw new Exception("Clave fuera de tiempo");
         }
         

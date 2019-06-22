@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'App\\Models\\Compra' => $baseDir . '/app/models/Compra.php',
+    'App\\Models\\Log' => $baseDir . '/app/models/Log.php',
     'App\\Models\\Usuario' => $baseDir . '/app/models/Usuario.php',
     'Carbon\\Carbon' => $vendorDir . '/nesbot/carbon/src/Carbon/Carbon.php',
     'Carbon\\CarbonImmutable' => $vendorDir . '/nesbot/carbon/src/Carbon/CarbonImmutable.php',
@@ -41,6 +42,7 @@ return array(
     'Clases\\Token' => $baseDir . '/clases/Token.php',
     'Clases\\UsuarioApi' => $baseDir . '/clases/UsuarioApi.php',
     'Clases\\VerificaPerfilMW' => $baseDir . '/clases/VerificaPerfilMW.php',
+    'Clases\\VerificarLoginMW' => $baseDir . '/clases/VerificarLoginMW.php',
     'DeepCopy\\DeepCopy' => $vendorDir . '/myclabs/deep-copy/src/DeepCopy/DeepCopy.php',
     'DeepCopy\\Exception\\CloneException' => $vendorDir . '/myclabs/deep-copy/src/DeepCopy/Exception/CloneException.php',
     'DeepCopy\\Exception\\PropertyException' => $vendorDir . '/myclabs/deep-copy/src/DeepCopy/Exception/PropertyException.php',

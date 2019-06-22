@@ -22,7 +22,5 @@ return function (App $app)
         $this->get('/', \CompraApi::class . ':GetAll');    
         $this->get('/{id}', \CompraApi::class . ':GetById');
         $this->post('/', \CompraApi::class . ':RegisterCompra');
-        $this->post('/login', \CompraApi::class . ':LoginUser');
-    })->add(\VerificaPerfilMW::class . ':VerificarPerfil');
-    
+    })->add(\VerificarLoginMW::class . ':VerificarLogin');    
 };

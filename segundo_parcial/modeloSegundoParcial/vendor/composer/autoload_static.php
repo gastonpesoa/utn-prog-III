@@ -207,6 +207,7 @@ class ComposerStaticInit71a62da78f4aa44ffb2772b8e2103033
 
     public static $classMap = array (
         'App\\Models\\Compra' => __DIR__ . '/../..' . '/app/models/Compra.php',
+        'App\\Models\\Log' => __DIR__ . '/../..' . '/app/models/Log.php',
         'App\\Models\\Usuario' => __DIR__ . '/../..' . '/app/models/Usuario.php',
         'Carbon\\Carbon' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Carbon.php',
         'Carbon\\CarbonImmutable' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/CarbonImmutable.php',
@@ -241,6 +242,7 @@ class ComposerStaticInit71a62da78f4aa44ffb2772b8e2103033
         'Clases\\Token' => __DIR__ . '/../..' . '/clases/Token.php',
         'Clases\\UsuarioApi' => __DIR__ . '/../..' . '/clases/UsuarioApi.php',
         'Clases\\VerificaPerfilMW' => __DIR__ . '/../..' . '/clases/VerificaPerfilMW.php',
+        'Clases\\VerificarLoginMW' => __DIR__ . '/../..' . '/clases/VerificarLoginMW.php',
         'DeepCopy\\DeepCopy' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/DeepCopy.php',
         'DeepCopy\\Exception\\CloneException' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/Exception/CloneException.php',
         'DeepCopy\\Exception\\PropertyException' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/Exception/PropertyException.php',

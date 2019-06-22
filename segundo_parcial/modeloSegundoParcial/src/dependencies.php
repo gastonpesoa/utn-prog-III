@@ -3,7 +3,10 @@
 use Slim\App;
 use Clases\UsuarioApi;
 use Clases\CompraApi;
+use Clases\LogApi;
 use Clases\VerificaPerfilMW;
+use Clases\VerificarLoginMW;
+use Clases\LogApiMW;
 
 return function (App $app) {
     $container = $app->getContainer();
@@ -40,10 +43,18 @@ return function (App $app) {
 
     $container['CompraApi'] = function($c) {
         return new CompraApi($c->get('logger'));
-    };
+    };    
 
     // Registration MW
     $container['VerificaPerfilMW'] = function() {
         return new VerificaPerfilMW();
+    };
+
+    $container['VerificarLoginMW'] = function() {
+        return new VerificarLoginMW();
+    };
+    
+    $container['LogApiMW'] = function() {
+        return new LogApiMW();
     };
 };
